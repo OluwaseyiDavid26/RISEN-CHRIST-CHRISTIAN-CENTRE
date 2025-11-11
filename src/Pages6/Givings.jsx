@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import accesslogo from "../assets/access-logo.png";
 import unionlogo from "../assets/union-logo.png";
@@ -24,7 +25,7 @@ function Givings() {
       >
         <h2 className="text-5xl font-bold mb-2">WAYS TO GIVE</h2>
         <p className="text-gray-600 text-lg">
-          Give securely through our online platform.
+          Give securely through our online platforms.
         </p>
       </motion.div>
 

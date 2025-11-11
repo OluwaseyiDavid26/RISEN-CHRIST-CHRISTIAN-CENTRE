@@ -144,6 +144,7 @@
 // export default Events;
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import events1 from "../assets/events-1.png";
 import events2 from "../assets/events-2.png";
@@ -302,9 +303,11 @@ function Events() {
           transition={{ delay: 0.4, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <button className="border bg-[#ff0e40] border-gray-800 px-6 py-3 rounded hover:bg-gray-600 hover:text-white transition">
-            View All Events
-          </button>
+          <Link to="/events">
+            <button className="border bg-[#ff0e40] border-gray-800 px-6 py-3 rounded hover:bg-gray-600 hover:text-white transition">
+              View All Events
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

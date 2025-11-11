@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Worship() {
   return (
@@ -30,16 +31,17 @@ function Worship() {
             hope.
           </motion.p>
 
-          {/* Button */}
-          <motion.button
-            className="mt-2 px-6 py-3 bg-[#ff004f] text-white font-bold rounded hover:bg-[#e60045] transition"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Give Now
-          </motion.button>
+          <Link to="/giving">
+            <motion.button
+              className="mt-2 px-6 py-3 bg-[#ff004f] text-white font-bold rounded hover:bg-[#e60045] transition"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Give Now
+            </motion.button>
+          </Link>
         </div>
       </section>
 
