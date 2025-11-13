@@ -3,18 +3,20 @@ import { motion } from "framer-motion";
 import image10 from "../assets/image-10.png";
 import image11 from "../assets/image-11.png";
 import image12 from "../assets/image-12.png";
-import image13 from "../assets/image-13.png";
+import image13 from "../assets/accra-img.avif";
+import image14 from "../assets/london-img.avif";
+import image15 from "../assets/new-york-img.jpg";
 
 const branches = [
   {
     location: "Lagos",
     address: "15 Grace Avenue, Victoria Island, Lagos, Nigeria",
-    image: image10,
+    image: image11,
   },
   {
     location: "Abuja",
     address: "22 Dominion Road, Garki, Abuja, Nigeria",
-    image: image11,
+    image: image10,
   },
   {
     location: "Port Harcourt",
@@ -29,12 +31,12 @@ const branches = [
   {
     location: "London",
     address: "78 Revival Street, Stratford, London, UK",
-    image: image12,
+    image: image14,
   },
   {
     location: "New York",
     address: "320 Faith Boulevard, Brooklyn,  New York, USA",
-    image: image13,
+    image: image15,
   },
 ];
 

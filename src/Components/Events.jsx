@@ -161,26 +161,26 @@ function Events() {
       image: events1,
     },
     {
-      date: "APR 10",
+      date: "MAR 25",
       title: "Empowerment Conference",
       category: "CONFERENCE",
       image: events2,
     },
     {
-      date: "MAY 15",
+      date: "MAR 25",
       title: "Community Music Festival",
       category: "MUSIC",
       image: events3,
     },
     {
-      date: "JUN 5",
-      title: "Birthday",
+      date: "MAR 25",
+      title: "Creative Arts Workshop",
       category: "DAY",
       image: events4,
     },
     {
-      date: "JUN 5",
-      title: "Birthday",
+      date: "MAR 25",
+      title: "Summer Spiritual Retreat",
       category: "DAY",
       image: events5,
     },
@@ -189,7 +189,7 @@ function Events() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="px-6 py-12 bg-gray-900 text-white">
+    <section className="px-6 py-12 bg-[#2E2E2E] text-white">
       <div className="w-full">
         {/* Header */}
         <motion.h2

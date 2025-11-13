@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import audio1 from "../assets/audio1.avif";
 import audio2 from "../assets/audio2.avif";
 import audio3 from "../assets/audio3.avif"; // Replace with your actual image

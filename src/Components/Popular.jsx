@@ -6,8 +6,8 @@ import image13 from "../assets/image-13.png";
 
 function Popular() {
   const branches = [
-    { img: image10, name: "Lagos Branch" },
-    { img: image11, name: "Abuja Branch" },
+    { img: image11, name: "Lagos Branch" },
+    { img: image10, name: "Abuja Branch" },
     { img: image12, name: "Port Harcourt Branch" },
     { img: image13, name: "Ibadan Branch" },
   ];

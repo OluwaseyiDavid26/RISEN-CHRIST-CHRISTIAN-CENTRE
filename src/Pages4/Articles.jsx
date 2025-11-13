@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import article1 from "../assets/article-img1.avif";
@@ -81,12 +82,12 @@ function Article() {
         viewport={{ once: true }}
         transition={{ delay: 0.5, duration: 0.8 }}
       >
-        <a
-          href="#"
+        <Link
+          to="/articles2"
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More
-        </a>
+        </Link>
       </motion.div>
     </section>
   );
