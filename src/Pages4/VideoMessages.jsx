@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Video from "../assets/videoMessage.mp4";
 
 function VideoMessages() {
+  const navigate = useNavigate();
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -85,7 +87,7 @@ function VideoMessages() {
         transition={{ duration: 0.8, delay: 0.6 }}
       >
         <a
-          href="#"
+          onClick={() => navigate("/video-messages-2")}
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More

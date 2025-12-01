@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import podcast1 from "../assets/podcast1.avif";
 import podcast2 from "../assets/podcast2.avif";
 import podcast3 from "../assets/podcast3.avif";
@@ -23,6 +24,7 @@ const PodcastData = [
 ];
 
 function Podcast() {
+  const navigate = useNavigate();
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -108,12 +110,12 @@ function Podcast() {
         viewport={{ once: true }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        <a
-          href="#"
+        <button
+          onClick={() => navigate("/podcasts-2")}
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More
-        </a>
+        </button>
       </motion.div>
     </motion.section>
   );

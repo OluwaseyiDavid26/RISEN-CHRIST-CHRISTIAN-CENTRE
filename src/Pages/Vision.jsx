@@ -34,12 +34,12 @@ function Vision() {
               The Visioneer
             </h2>
             <p className="text-base text-gray-300 leading-relaxed">
-              [Founder’s Name], the Visioneer of The Risen Christ Christian
-              Centre, is a passionate servant of God with a deep calling to lead
-              people into a life-changing encounter with Jesus. With a heart for
-              revival and spiritual transformation, they have dedicated their
-              life to building a church rooted in faith, prayer, and the power
-              of the Holy Spirit.
+              [Pastor Raji Bashir Babatunde], the Visioneer of The Risen Christ
+              Christian Centre, is a passionate servant of God with a deep
+              calling to lead people into a life-changing encounter with Jesus.
+              With a heart for revival and spiritual transformation, they have
+              dedicated their life to building a church rooted in faith, prayer,
+              and the power of the Holy Spirit.
             </p>
           </div>
         </motion.div>

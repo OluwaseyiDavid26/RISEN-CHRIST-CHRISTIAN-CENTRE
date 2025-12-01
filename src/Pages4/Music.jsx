@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import music1 from "../assets/music1.avif";
 import music2 from "../assets/music2.avif";
 import music3 from "../assets/music3.webp";
@@ -23,6 +24,7 @@ const musicData = [
 ];
 
 function Music() {
+  const navigate = useNavigate();
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -101,12 +103,12 @@ function Music() {
         viewport={{ once: true }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        <a
-          href="#"
+        <button
+          onClick={() => navigate("/music-2")}
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More
-        </a>
+        </button>
       </motion.div>
     </motion.section>
   );

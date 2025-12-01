@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import audio1 from "../assets/audio1.avif";
 import audio2 from "../assets/audio2.avif";
-import audio3 from "../assets/audio3.avif"; // Replace with your actual image
+import audio3 from "../assets/audio3.avif";
 
 const videoData = [
   {
@@ -23,6 +24,7 @@ const videoData = [
 ];
 
 function AudioMessages() {
+  const navigate = useNavigate();
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -107,15 +109,16 @@ function AudioMessages() {
         viewport={{ once: true }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        <a
-          href="#"
+        <button
+          onClick={() => navigate("/audio-messages-2")}
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More
-        </a>
+        </button>
       </motion.div>
     </motion.section>
   );
 }
+
 
 export default AudioMessages;

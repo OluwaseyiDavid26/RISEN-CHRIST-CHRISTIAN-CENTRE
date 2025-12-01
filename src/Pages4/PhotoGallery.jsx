@@ -1,10 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import image10 from "../assets/photo1.avif"; // Replace with your actual image
 import image12 from "../assets/photo2.avif"; // Replace with your actual image
 import image13 from "../assets/photo3.avif"; // Replace with your actual image
 
 function PhotoGallery() {
+  const navigate = useNavigate();
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -59,7 +61,7 @@ function PhotoGallery() {
         transition={{ duration: 0.8 }}
       >
         <a
-          href="#"
+          onClick={() => navigate("/photo-gallery-2")}
           className="bg-[#ff0e40] rounded-md px-6 py-3 text-white text-lg font-semibold hover:bg-[#e00c3a] transition duration-300 cursor-pointer text-center capitalize"
         >
           See More

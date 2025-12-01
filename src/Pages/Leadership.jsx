@@ -9,28 +9,35 @@ const pastors = [
   {
     image: pst1,
     title: "LEAD PASTOR",
-    name: "PASTOR NAME",
+    name: "Pastor Raji Bashir Babatunde",
     description:
       "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
   },
   {
     image: pst2,
     title: "LEAD PASTOR",
-    name: "PASTOR NAME",
+    name: "Pastor Raji-Babatunde Idowu",
     description:
       "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
   },
   {
     image: pst3,
-    title: "LEAD PASTOR",
-    name: "PASTOR NAME",
+    title: "Resident Minister",
+    name: "Minister Olapade Emmanuel Olalekan",
     description:
       "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
   },
   {
     image: pst4,
     title: "LEAD PASTOR",
-    name: "PASTOR NAME",
+    name: "Minister Abe Isaac Tolushe (HOD Music)",
+    description:
+      "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
+  },
+  {
+    image: pst4,
+    title: "LEAD PASTOR",
+    name: "Minister Omorinoye Praise Yinjesu (HOD Visitation and Follow up)",
     description:
       "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
   },

@@ -52,6 +52,11 @@ import Articles from "./Pages4/Articles.jsx";
 
 //
 import Articles2 from "./Pages4/Articles2.jsx";
+import AudioMessage2 from "./Pages4/AudioMessage2";
+import Podcasts2 from "./Pages4/Podcasts2";
+import Music2 from "./Pages4/Music2.jsx";
+import VideoMessages2 from "./Pages4/VideoMessages2.jsx";
+import PhotoGallery2 from "./Pages4/PhotoGallery2.jsx";
 
 function App() {
   return (
@@ -73,6 +78,11 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         //
         <Route path="/articles2" element={<Articles2 />} />
+        <Route path="/audio-messages-2" element={<AudioMessage2 />} />
+        <Route path="/podcasts-2" element={<Podcasts2 />} />
+        <Route path="/music-2" element={<Music2 />} />
+        <Route path="/video-messages-2" element={<VideoMessages2 />} />
+        <Route path="/photo-gallery-2" element={<PhotoGallery2 />} />
       </Routes>
       <Footer />
     </BrowserRouter>
