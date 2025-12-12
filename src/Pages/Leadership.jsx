@@ -18,28 +18,35 @@ const pastors = [
     title: "LEAD PASTOR",
     name: "Pastor Raji-Babatunde Idowu",
     description:
-      "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
+      "Raji Babatunde Idowu is a preacher of the word of God, a fervent prayer warrior, and a counsellor. She is a children's minister and has been the Deputy Coordinator of the Boanerges Fellowship since 2009. She is a Business Educator by training, and she is joyfully married to Raji Bashir Babatunde. They are both blessed with many children both biological and spiritual.",
   },
   {
     image: pst3,
     title: "Resident Minister",
     name: "Minister Olapade Emmanuel Olalekan",
     description:
-      "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
+      "Olapade Olalekan holds a B.Tech. degree in Agricultural Engineering from Ladoke Akintola University of Technology, Ogbomoso. He is happily married to Omolade Olapade, and they are currently blessed with a daughter, Jael.",
   },
   {
     image: pst4,
-    title: "LEAD PASTOR",
-    name: "Minister Abe Isaac Tolushe (HOD Music)",
+    title: "(HOD MUSIC)",
+    name: "Minister Abe Isaac Tolushe ",
     description:
-      "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
+      "Abe Tolushe holds an MB,BS degree in Medicine and Surgery from the University of Ilorin, Kwara State. He is happily married to Abimbola Abe, and they are blessed with two children, Emmanuella and Emmanuel.",
   },
   {
     image: pst4,
-    title: "LEAD PASTOR",
-    name: "Minister Omorinoye Praise Yinjesu (HOD Visitation and Follow up)",
+    title: "(HOD Visitation and Follow up)",
+    name: "Minister Omorinoye Praise Yinjesu",
     description:
-      "Bringing vision and direction to the church, our Lead Pastor is passionate about teaching the Word, leading by example, and shepherding God’s people.",
+      "Omorinoye Praise holds a B.Sc. in Accounting from Ekiti State University, Ado Ekiti. She is happily married to Omorinoye Wale, and they are blessed with two sons, Jeshurun and Jason.",
+  },
+  {
+    image: pst4,
+    title: "(HOD Visitation and Follow up)",
+    name: "Minister Omorinoye Praise Yinjesu ",
+    description:
+      "Mesele Bukola holds a B.Sc. in Accounting from University of Abuja. She is happily married to Mesele Ayotunde and they are both doing great in the purpose of God ",
   },
 ];
 

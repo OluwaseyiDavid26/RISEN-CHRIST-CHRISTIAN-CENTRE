@@ -102,51 +102,56 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Image imports - make sure these file names match your actual files
-import impartationImg1 from "../assets/impartation1.JPG";
-import impartationImg2 from "../assets/impartation1.JPG";
-import dressDownImg1 from "../assets/impartation1.JPG";
-import dressDownImg2 from "../assets/impartation1.JPG";
-import communionImg1 from "../assets/impartation1.JPG";
-import communionImg2 from "../assets/impartation1.JPG";
+// Base URL for Google Drive images (using thumbnail format)
+const DRIVE_BASE_URL = "https://drive.google.com/thumbnail?id=";
+const DRIVE_SIZE = "&sz=w2000"; // High resolution
+
+const imageUrls = {
+  impartation1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu${DRIVE_SIZE}`,
+  impartation2: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+  impartation3: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+  impartation4: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+  impartation5: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+  impartation6: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+};
 
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: impartationImg1,
+      image: imageUrls.impartation1,
       title: "Impartation Service",
       description:
         "Experience the power of God's presence and receive fresh anointing",
       date: "Every First Sunday",
     },
     {
-      image: impartationImg2,
+      image: imageUrls.impartation2,
       title: "Impartation Service",
       description: "A time of spiritual renewal and divine encounter",
       date: "Every First Sunday",
     },
     {
-      image: dressDownImg1,
+      image: imageUrls.impartation3,
       title: "Dress Down Service",
       description: "Come as you are and worship in comfort and community",
       date: "Every Last Sunday",
     },
     {
-      image: dressDownImg2,
+      image: imageUrls.impartation4,
       title: "Dress Down Service",
       description: "Casual worship with the same powerful presence",
       date: "Every Last Sunday",
     },
     {
-      image: communionImg1,
+      image: imageUrls.impartation5,
       title: "Communion Sunday",
       description: "Remember His sacrifice and celebrate His love together",
       date: "Second Sunday Monthly",
     },
     {
-      image: communionImg2,
+      image: imageUrls.impartation6,
       title: "Communion Sunday",
       description: "Partake in the body and blood of our Lord Jesus Christ",
       date: "Second Sunday Monthly",
@@ -189,8 +194,8 @@ function Hero() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
-            {/* Dark Overlay */}
-            <div className="absolute inset-0  bg-opacity-50"></div>
+            {/* Dark Overlay - FIXED */}
+            <div className="absolute inset-0 bg-black/50"></div>
           </div>
 
           {/* Content */}
@@ -227,33 +232,30 @@ function Hero() {
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-3 rounded-full transition-all z-10"
-        aria-label="Previous slide"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 transition z-10"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft size={32} />
       </button>
 
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-3 rounded-full transition-all z-10"
-        aria-label="Next slide"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 transition z-10"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight size={32} />
       </button>
 
-      {/* Dots Navigation */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      {/* Slide Indicators (Dots) */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
               index === currentSlide
-                ? "bg-pink-600 w-8"
-                : "bg-white bg-opacity-50 hover:bg-opacity-75"
+                ? "bg-pink-600"
+                : "bg-white/50 hover:bg-white"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
+          ></button>
         ))}
       </div>
     </section>

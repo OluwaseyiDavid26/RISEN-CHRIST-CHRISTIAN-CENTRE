@@ -32,12 +32,13 @@ function About() {
               The Church
             </h3>
             <p className="text-sm text-gray-700 leading-relaxed">
-              At The Risen Christ Christian Centre, we are a community of
-              believers dedicated to spreading the love of Christ and empowering
-              lives through the Word of God. Our mission is to raise a
-              generation of Spirit-filled believers who reflect Christ’s love,
-              impact their communities, and carry the message of salvation to
-              the world.
+              We are raising a generation of royalty whose lives are touched and
+              fixed with the word of the Lord (The Emperor), who in return will
+              join hands with the Emperor to fix the decadence in the world by
+              extinguishing the gross darkness in it via the light of the word
+              and representing Christ as Royal Ambassador. The Christ Empire was
+              founded by Pastor Raji Bashir Babatunde on February 29, 2020, in
+              Ilorin, Kwara State, Nigeria
             </p>
           </motion.div>
 
@@ -53,9 +54,10 @@ function About() {
               Our Vision
             </h3>
             <p className="text-sm text-gray-700 leading-relaxed">
-              To transform lives through the power of the gospel, raising
-              Kingdom-minded believers who walk in faith, purpose, and divine
-              destiny.
+              Our vision is to fix the decadence in the world by bringing an end
+              to the reign of darkness in every life, even as we help people
+              rediscover their royalty and enjoy the full benefit of redemption
+              as we prepare every man for Christ’s second coming.
             </p>
           </motion.div>
         </div>
