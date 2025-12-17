@@ -200,7 +200,7 @@ function Hero() {
 
           {/* Content */}
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 text-white">
-            <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-4 animate-fadeIn">
+            <h1 className="text-4xl md:text-7xl font-playfair font-bold mb-4 animate-fadeIn">
               WELCOME TO THE RISEN CHRIST CHRISTIAN CENTRE
             </h1>
 
