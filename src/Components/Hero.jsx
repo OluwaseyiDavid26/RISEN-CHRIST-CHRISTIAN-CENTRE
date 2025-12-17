@@ -98,7 +98,6 @@
 // }
 
 // export default Hero;
-
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -108,11 +107,11 @@ const DRIVE_SIZE = "&sz=w2000"; // High resolution
 
 const imageUrls = {
   impartation1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu${DRIVE_SIZE}`,
-  impartation2: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
-  impartation3: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
-  impartation4: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
-  impartation5: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
-  impartation6: `${DRIVE_BASE_URL}1-JSbKlyON9wbmS_5pmJo8LhX4o7kSIms${DRIVE_SIZE}`,
+  impartation2: `${DRIVE_BASE_URL}1skyMpIbImkxiL1oI0GiVTAxrqq_L2tUx${DRIVE_SIZE}`,
+  impartation3: `${DRIVE_BASE_URL}1UJdmr6qV8WUA9IsbRT545muMTGRDPNWJ${DRIVE_SIZE}`,
+  impartation4: `${DRIVE_BASE_URL}1r_q1cI94diPa78tcuKeeaoxL3yNT4XSC${DRIVE_SIZE}`,
+  impartation5: `${DRIVE_BASE_URL}1DM7Mxbu0Upk8NzJNpmU1s7xoP2TKyb3S${DRIVE_SIZE}`,
+  impartation6: `${DRIVE_BASE_URL}1s2WrKFju1SfVSURfkSvWeIrEA8_DevYQ${DRIVE_SIZE}`,
 };
 
 function Hero() {
@@ -200,7 +199,7 @@ function Hero() {
 
           {/* Content */}
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 text-white">
-            <h1 className="text-4xl md:text-7xl font-playfair font-bold mb-4 animate-fadeIn">
+            <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-4 animate-fadeIn">
               WELCOME TO THE RISEN CHRIST CHRISTIAN CENTRE
             </h1>
 
