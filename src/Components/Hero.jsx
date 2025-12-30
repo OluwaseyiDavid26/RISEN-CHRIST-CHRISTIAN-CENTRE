@@ -98,6 +98,7 @@
 // }
 
 // export default Hero;
+
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -193,36 +194,40 @@ function Hero() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slide.image})` }}
           >
-            {/* Dark Overlay - FIXED */}
-            <div className="absolute inset-0 bg-black/50"></div>
+            {/* Dark Overlay - Made darker for better readability */}
+            <div className="absolute inset-0 bg-black/60"></div>
           </div>
 
           {/* Content */}
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-4 text-white">
-            <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-4 animate-fadeIn">
+          <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
               WELCOME TO THE RISEN CHRIST CHRISTIAN CENTRE
             </h1>
 
-            <div className="mt-8 space-y-4">
-              <h2 className="text-3xl md:text-5xl font-semibold">
+            <div className="mt-4 sm:mt-8 space-y-2 sm:space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold">
                 {slide.title}
               </h2>
-              <p className="text-xl md:text-2xl max-w-2xl mx-auto">
+              <p className="text-base sm:text-xl md:text-2xl max-w-2xl mx-auto px-2">
                 {slide.description}
               </p>
-              <p className="text-lg md:text-xl text-pink-300">{slide.date}</p>
+              <p className="text-base sm:text-lg md:text-xl text-pink-300">
+                {slide.date}
+              </p>
             </div>
 
-            <button className="mt-10 flex items-center gap-2 bg-pink-600 text-white px-8 py-4 rounded-lg hover:bg-pink-700 transition-all transform hover:scale-105">
+            <button className="mt-6 sm:mt-10 flex items-center gap-2 bg-pink-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg hover:bg-pink-700 transition-all transform hover:scale-105">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="w-5 h-5 sm:w-6 sm:h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M10 16.5V7.5L16 12L10 16.5Z" />
               </svg>
-              <span className="text-lg font-semibold">Watch Messages</span>
+              <span className="text-base sm:text-lg font-semibold">
+                Watch Messages
+              </span>
             </button>
           </div>
         </div>
