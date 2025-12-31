@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import whoimg from "../assets/who-img.png";
+import whoimg from "../assets/light.JPG";
 
 function WhoWeAre() {
   return (
