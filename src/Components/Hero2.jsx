@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import image10 from "../assets/who-imgs.avif";
-import image11 from "../assets/who-img.png";
+import image10 from "../assets/visions.JPG";
+import image11 from "../assets/leaderships.JPG";
 
 function Hero2() {
   return (

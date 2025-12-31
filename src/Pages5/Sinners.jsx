@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import sinner from "../assets/sinner-1.avif";
+import sinner from "../assets/sinners2.JPG";
 
 function Sinners() {
   return (

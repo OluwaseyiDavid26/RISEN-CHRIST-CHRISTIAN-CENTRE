@@ -1,5 +1,5 @@
 import React from "react";
-import visionimg2 from "../assets/vision-img2.png";
+import visionimg2 from "../assets/leadpst.JPG";
 import { motion } from "framer-motion";
 
 function Vision() {

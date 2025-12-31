@@ -1,13 +1,21 @@
 // import React, { useState, useRef } from "react";
 // import { Download, Play, Pause, Search } from "lucide-react";
 
-// // Import your images here
-// import image1 from "../assets/podcasts1.jpg";
-// import image2 from "../assets/podcasts2.jpg";
-// import image3 from "../assets/podcasts3.jpg";
-// import image4 from "../assets/podcasts4.jpg";
-// import image5 from "../assets/podcasts5.jpg";
-// import image6 from "../assets/podcasts6.jpg";
+// // Google Drive Image URLs
+// const DRIVE_BASE_URL = "https://lh3.googleusercontent.com/d/";
+
+// const imageUrls = {
+//   image1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+//   image2: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+//   image3: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+//   image4: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+//   image5: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+//   image6: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+// };
+
+// // Placeholder audio URL for testing
+// const placeholderAudio =
+//   "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
 // const Podcasts2 = () => {
 //   const [playingIndex, setPlayingIndex] = useState(null);
@@ -16,60 +24,62 @@
 //   const [searchQuery, setSearchQuery] = useState("");
 //   const audioRefs = useRef([]);
 
-//   // Sample podcasts data - replace with your actual data and imported images
+//   // Podcasts data
 //   const podcasts = [
 //     {
 //       id: 1,
 //       title: "Faith In Action: Living Out What You Believe",
 //       host: "Hosted By Pastor David Adebayo",
-//       image: 1,
-//       audioUrl: "/path-to-audio1.mp3",
+//       image: imageUrls.image1,
+//       audioUrl: placeholderAudio,
 //     },
 //     {
 //       id: 2,
 //       title: "Spiritual Growth: How To Mature As A Christian",
 //       host: "With Rev. Grace Okonkwo",
-//       image: 2,
-//       audioUrl: "/path-to-audio2.mp3",
+//       image: imageUrls.image2,
+//       audioUrl: placeholderAudio,
 //     },
 //     {
 //       id: 3,
 //       title: "Understanding God's Will For Your Life",
 //       host: "Featuring Apostle Samuel Okechukwu",
-//       image: 3,
-//       audioUrl: "/path-to-audio3.mp3",
+//       image: imageUrls.image3,
+//       audioUrl: placeholderAudio,
 //     },
 //     {
 //       id: 4,
 //       title: "Prayer And Fasting: Keys To Breakthrough",
 //       host: "Hosted By Pastor David Adebayo",
-//       image: 4,
-//       audioUrl: "/path-to-audio4.mp3",
+//       image: imageUrls.image4,
+//       audioUrl: placeholderAudio,
 //     },
 //     {
 //       id: 5,
 //       title: "The Power Of Worship In Daily Life",
 //       host: "With Rev. Grace Okonkwo",
-//       image: 5,
-//       audioUrl: "/path-to-audio5.mp3",
+//       image: imageUrls.image5,
+//       audioUrl: placeholderAudio,
 //     },
 //     {
 //       id: 6,
 //       title: "Building Strong Christian Foundations",
 //       host: "Featuring Apostle Samuel Okechukwu",
-//       image: 6,
-//       audioUrl: "/path-to-audio6.mp3",
+//       image: imageUrls.image6,
+//       audioUrl: placeholderAudio,
 //     },
 //   ];
 
 //   const handlePlayPause = (index) => {
 //     const audioElement = audioRefs.current[index];
 
+//     if (!audioElement) return;
+
 //     if (playingIndex === index) {
 //       audioElement.pause();
 //       setPlayingIndex(null);
 //     } else {
-//       if (playingIndex !== null) {
+//       if (playingIndex !== null && audioRefs.current[playingIndex]) {
 //         audioRefs.current[playingIndex].pause();
 //       }
 //       audioElement.play();
@@ -79,22 +89,28 @@
 
 //   const handleTimeUpdate = (index) => {
 //     const audioElement = audioRefs.current[index];
-//     setCurrentTime((prev) => ({
-//       ...prev,
-//       [index]: audioElement.currentTime,
-//     }));
+//     if (audioElement) {
+//       setCurrentTime((prev) => ({
+//         ...prev,
+//         [index]: audioElement.currentTime,
+//       }));
+//     }
 //   };
 
 //   const handleLoadedMetadata = (index) => {
 //     const audioElement = audioRefs.current[index];
-//     setDuration((prev) => ({
-//       ...prev,
-//       [index]: audioElement.duration,
-//     }));
+//     if (audioElement) {
+//       setDuration((prev) => ({
+//         ...prev,
+//         [index]: audioElement.duration,
+//       }));
+//     }
 //   };
 
 //   const handleSeek = (index, e) => {
 //     const audioElement = audioRefs.current[index];
+//     if (!audioElement) return;
+
 //     const progressBar = e.currentTarget;
 //     const rect = progressBar.getBoundingClientRect();
 //     const clickPosition = e.clientX - rect.left;
@@ -114,6 +130,7 @@
 //     const link = document.createElement("a");
 //     link.href = audioUrl;
 //     link.download = `${title}.mp3`;
+//     link.target = "_blank";
 //     document.body.appendChild(link);
 //     link.click();
 //     document.body.removeChild(link);
@@ -161,6 +178,10 @@
 //                 src={podcast.image}
 //                 alt={podcast.title}
 //                 className="w-full h-full object-cover"
+//                 onError={(e) => {
+//                   e.target.src =
+//                     "https://via.placeholder.com/400x400?text=Podcast+Image";
+//                 }}
 //               />
 
 //               {/* Play Button in Center */}
@@ -185,6 +206,7 @@
 //                   onTimeUpdate={() => handleTimeUpdate(index)}
 //                   onLoadedMetadata={() => handleLoadedMetadata(index)}
 //                   onEnded={() => setPlayingIndex(null)}
+//                   preload="metadata"
 //                 />
 
 //                 <div className="flex items-center gap-3">
@@ -248,19 +270,19 @@
 // };
 
 // export default Podcasts2;
+
 import React, { useState, useRef } from "react";
 import { Download, Play, Pause, Search } from "lucide-react";
 
 // Google Drive Image URLs
 const DRIVE_BASE_URL = "https://lh3.googleusercontent.com/d/";
-
 const imageUrls = {
-  image1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
-  image2: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
-  image3: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
-  image4: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
-  image5: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
-  image6: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu`,
+  image1: `${DRIVE_BASE_URL}1dqmdt0ZN6aDPaFVfj5I0pM6Wu9JaGuxv`,
+  image2: `${DRIVE_BASE_URL}1bzNGLf-_DYoPLkQ2UI3FJVN29XNBtRA5`,
+  image3: `${DRIVE_BASE_URL}1Rvvl6PvVd1Ysbp2Z4H9bcvNtaaXTi_sI`,
+  image4: `${DRIVE_BASE_URL}1yMTEtR1kLrzO66KNJFQrySmw-7nYag49`,
+  image5: `${DRIVE_BASE_URL}13sF9xFB-vplUH7CyaADrR2ipfG7hbcmS`,
+  image6: `${DRIVE_BASE_URL}1bzNGLf-_DYoPLkQ2UI3FJVN29XNBtRA5`, // Using image2 as placeholder - replace with actual image6 ID
 };
 
 // Placeholder audio URL for testing
@@ -322,7 +344,6 @@ const Podcasts2 = () => {
 
   const handlePlayPause = (index) => {
     const audioElement = audioRefs.current[index];
-
     if (!audioElement) return;
 
     if (playingIndex === index) {
@@ -366,6 +387,7 @@ const Podcasts2 = () => {
     const clickPosition = e.clientX - rect.left;
     const progressBarWidth = progressBar.offsetWidth;
     const newTime = (clickPosition / progressBarWidth) * duration[index];
+
     audioElement.currentTime = newTime;
   };
 
