@@ -104,14 +104,12 @@
 // }
 
 // export default Leadership;
-
 import React from "react";
 import { motion } from "framer-motion";
 
 const DRIVE_BASE_URL = "https://drive.google.com/thumbnail?id=";
 const DRIVE_SIZE = "&sz=w1000";
 
-// ${DRIVE_BASE_URL}10jIAFS0AhriwNGiXnRI_VwTibaHOeLPu${DRIVE_SIZE
 const imageUrls = {
   pst1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu${DRIVE_SIZE}`,
   pst2: `${DRIVE_BASE_URL}1IMA4EYKapsIPsnR4xk0vgyH0hPCkMbf0${DRIVE_SIZE}`,
@@ -144,12 +142,12 @@ const pastors = [
   {
     image: imageUrls.pst4,
     title: "(HOD MUSIC)",
-    name: "Minister Abe Isaac Tolushe ",
+    name: "Minister Abe Isaac Tolushe",
     description:
       "Abe Tolushe holds an MB,BS degree in Medicine and Surgery from the University of Ilorin, Kwara State. He is happily married to Abimbola Abe, and they are blessed with two children, Emmanuella and Emmanuel.",
   },
   {
-    image: imageUrls.pst4, // Using pst4 twice as requested
+    image: imageUrls.pst4,
     title: "(HOD Visitation and Follow up)",
     name: "Minister Omorinoye Praise Yinjesu",
     description:
@@ -193,13 +191,19 @@ function Leadership() {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <img
-                src={pastor.image}
-                alt={pastor.name}
-                className="w-full h-[450px] object-cover"
-              />
-              <div className="text-left">
-                <h3 className="text-sm font-bold mt-2 text-gray-800 uppercase">
+              <div className="w-full h-[450px] bg-gray-100 flex items-center justify-center overflow-hidden">
+                <img
+                  src={pastor.image}
+                  alt={pastor.name}
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://via.placeholder.com/400x450?text=Pastor+Image";
+                  }}
+                />
+              </div>
+              <div className="text-left mt-4">
+                <h3 className="text-sm font-bold text-gray-800 uppercase">
                   {pastor.title}
                 </h3>
                 <h4 className="text-xl font-semibold mt-2 text-gray-900">
