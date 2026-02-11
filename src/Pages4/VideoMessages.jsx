@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Video from "../assets/videoMessage.mp4";
+import { db } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 function VideoMessages() {
   const navigate = useNavigate();
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const q = query(collection(db, "resources"), where("type", "==", "video"));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setVideos(data);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
+
   return (
     <motion.section
       className="w-full py-16 px-4 bg-white"
@@ -31,52 +53,62 @@ function VideoMessages() {
       </motion.div>
 
       {/* Grid Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        {[1, 2, 3].map((item, index) => (
-          <motion.div
-            key={index}
-            className="w-full"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: index * 0.2 }}
-          >
-            {/* Image */}
-            <video
-              src={Video}
-              controls
-              className="w-full h-[300px] object-cover mb-4 rounded-lg shadow"
-            />
+      {loading ? (
+        <div className="text-center py-10">Loading Videos...</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {videos.length === 0 ? (
+            <div className="col-span-full text-center">No video messages found.</div>
+          ) : (
+            videos.map((item, index) => (
+              <motion.div
+                key={item.id}
+                className="w-full flex flex-col"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.2 }}
+              >
+                {/* Video/Image */}
+                <div className="w-full h-[300px] mb-4 rounded-lg shadow overflow-hidden bg-black">
+                  {item.link && item.link.includes("youtube.com") ? (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={item.link.replace("watch?v=", "embed/")}
+                      title={item.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  ) : (
+                    <video
+                      src={item.link}
+                      controls
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
 
-            {/* Text */}
-            <div className="mb-2">
-              <h3 className="font-semibold text-lg">Glorious King</h3>
-              <p className="text-gray-500 text-sm">The Risen Christ Choir</p>
-            </div>
+                {/* Text */}
+                <div className="mb-2">
+                  <h3 className="font-semibold text-lg">{item.title}</h3>
+                  <p className="text-gray-500 text-sm" dangerouslySetInnerHTML={{ __html: item.description }} />
+                </div>
 
-            {/* Button aligned to the right */}
-            <div className="flex justify-end">
-              <button className="border px-4 py-2 rounded hover:bg-gray-100 flex items-center gap-2 text-sm">
-                Download
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"
-                  />
-                </svg>
-              </button>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+                {/* Button aligned to the right (if needed) */}
+                {/* 
+                    <div className="flex justify-end mt-auto">
+                    <button className="border px-4 py-2 rounded hover:bg-gray-100 flex items-center gap-2 text-sm">
+                        Download
+                    </button>
+                    </div> 
+                    */}
+              </motion.div>
+            ))
+          )}
+        </div>
+      )}
 
       {/* See More Button */}
       <motion.div

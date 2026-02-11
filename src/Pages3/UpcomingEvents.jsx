@@ -1,58 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
-import events1 from "../assets/events-1.png";
-import events2 from "../assets/events-2.png";
-import events4 from "../assets/events-4.png";
-import events3 from "../assets/events-3.png";
-import events5 from "../assets/events-1.png";
-
-const events = [
-  {
-    title: "PRAYER",
-    date: "March 15, 2025 – Prayer & Prophetic Night",
-    description:
-      "A night of intense prayer, prophetic <br/> Declarations, And Divine Breakthroughs.",
-    image: events1,
-  },
-  {
-    title: "CONFERENCE",
-    date: "April 5, 2025 – Kingdom Builders Conference",
-    description:
-      "A powerful gathering of Believers to Equip <br/> And Empower Kingdom Ambassadors.",
-    image: events2,
-  },
-  {
-    title: "RETREAT",
-    date: "April 19, 2025 – Youth & Singles Retreat",
-    description:
-      "A time of refreshing, networking <br/> And spiritual growth for young people.",
-    image: events4,
-  },
-  {
-    title: "HEALING",
-    date: "May 10, 2025 – Healing & Deliverance Service",
-    description:
-      "Experience the supernatural power of God for healing,  restoration, and deliverance.",
-    image: events4,
-  },
-  {
-    title: "SPECIAL SERVICES",
-    date: "June 1, 2025 – Pentecost Celebration Service",
-    description:
-      "Commemorating the outpouring of the Holy <br/> Spirit with worship and impartation",
-    image: events3,
-  },
-  {
-    title: "THANKSGIVING",
-    date: "July 20, 2025 – Annual Thanksgiving",
-    description:
-      "A time to reflect, give thanks <br/> And celebrate God’s faithfulness.",
-    image: events5,
-  },
-];
+import { db } from "../firebase";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 function UpcomingEvents() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const q = query(collection(db, "events"));
+        const querySnapshot = await getDocs(q);
+        const eventsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setEvents(eventsData);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="w-full py-16 px-4 mb-8 text-center">
+        <div className="text-xl">Loading Events...</div>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full py-16 px-4 mb-8">
       {/* Animated Heading */}
@@ -68,35 +50,42 @@ function UpcomingEvents() {
 
       {/* Event Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full px-4 sm:px-6 lg:px-8">
-        {events.map((event, index) => (
-          <motion.div
-            key={index}
-            className=""
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-[350px] object-cover rounded-xl shadow-md"
-            />
-            <h3 className="text-lg font-semibold mt-6 uppercase text-left">
-              {event.title}
-            </h3>
-            <p className="text-sm font-medium text-gray-800 text-left">
-              {event.date}
-            </p>
-            <p
-              className="text-sm text-gray-600 mt-4 text-left"
-              dangerouslySetInnerHTML={{ __html: event.description }}
-            />
-            {/* <p className="text-sm text-gray-600 mt-1 text-left">
-              dangerouslySetInnerHTML={{ __html: event.description }}
-            </p> */}
-          </motion.div>
-        ))}
+        {events.length === 0 ? (
+          <div className="col-span-full text-center text-gray-500">No upcoming events found.</div>
+        ) : (
+          events.map((event, index) => (
+            <motion.div
+              key={event.id}
+              className="flex flex-col h-full bg-white rounded-xl shadow-md overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                <img
+                  src={event.image || "https://via.placeholder.com/400x350?text=No+Image"}
+                  alt={event.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="p-4 flex flex-col flex-1">
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold uppercase text-left">
+                    {event.title}
+                  </h3>
+                  <p className="text-sm font-medium text-gray-800 text-left mt-2">
+                    {event.date}
+                  </p>
+                  <div
+                    className="text-sm text-gray-600 mt-4 text-left"
+                    dangerouslySetInnerHTML={{ __html: event.description }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          ))
+        )}
       </div>
     </section>
   );

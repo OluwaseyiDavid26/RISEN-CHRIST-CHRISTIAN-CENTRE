@@ -58,6 +58,14 @@ import Music2 from "./Pages4/Music2.jsx";
 import VideoMessages2 from "./Pages4/VideoMessages2.jsx";
 import PhotoGallery2 from "./Pages4/PhotoGallery2.jsx";
 
+// Admin Imports
+import AdminLogin from "./Pages/Admin/AdminLogin.jsx";
+import AdminLayout from "./Pages/Admin/AdminLayout.jsx";
+import EventsManager from "./Pages/Admin/EventsManager.jsx";
+import LivestreamManager from "./Pages/Admin/LivestreamManager.jsx";
+import ResourcesManager from "./Pages/Admin/ResourcesManager.jsx";
+import CommitmentsManager from "./Pages/Admin/CommitmentsManager.jsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -83,6 +91,15 @@ function App() {
         <Route path="/music-2" element={<Music2 />} />
         <Route path="/video-messages-2" element={<VideoMessages2 />} />
         <Route path="/photo-gallery-2" element={<PhotoGallery2 />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="events" element={<EventsManager />} />
+          <Route path="livestream" element={<LivestreamManager />} />
+          <Route path="resources" element={<ResourcesManager />} />
+          <Route path="commitments" element={<CommitmentsManager />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

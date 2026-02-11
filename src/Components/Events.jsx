@@ -1,47 +1,80 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import events1 from "../assets/events-1.png";
-import events2 from "../assets/events-2.png";
-import events3 from "../assets/events-3.png";
-import events4 from "../assets/events-4.png";
-import events5 from "../assets/events-5.png";
+import { db } from "../firebase"; // Import db
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 
 function Events() {
-  const events = [
-    {
-      date: "MAR 25",
-      title: "Sunday Worship Service",
-      category: "WORSHIP",
-      image: events1,
-    },
-    {
-      date: "MAR 25",
-      title: "Empowerment Conference",
-      category: "CONFERENCE",
-      image: events2,
-    },
-    {
-      date: "MAR 25",
-      title: "Community Music Festival",
-      category: "MUSIC",
-      image: events3,
-    },
-    {
-      date: "MAR 25",
-      title: "Creative Arts Workshop",
-      category: "DAY",
-      image: events4,
-    },
-    {
-      date: "MAR 25",
-      title: "Summer Spiritual Retreat",
-      category: "DAY",
-      image: events5,
-    },
-  ];
-
+  const [events, setEvents] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // Helper to parse date string "March 15, 2025" -> { month: "MAR", day: "15" }
+  const parseDate = (dateStr) => {
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d)) {
+        // Fallback if Date parsing fails or for formats like "Every Sunday"
+        return { month: "EVENT", day: "" };
+      }
+      const month = d.toLocaleString('default', { month: 'short' }).toUpperCase();
+      const day = d.getDate();
+      return { month, day };
+    } catch (e) {
+      return { month: "EVENT", day: "" };
+    }
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        // Fetch specific fields? No, just get all and map
+        // Ordering by 'createdAt' desc ensures new events replace previous ones in the sense of being top of list? 
+        // Or user said "ascending format" -> likely by date? 
+        // Since date is string, sorting by date is hard. 
+        // Let's sort by createdAt desc (Newest created first) as "New event should replace previous" usually implies LIFO or standard blog feed style.
+        // Wait, "possibly assending format" usually means Date Ascending (Upcoming -> Future).
+        // Getting them by createdAt for now, we can sort client side if needed.
+
+        const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        const fetchedEvents = querySnapshot.docs.map(doc => {
+          const data = doc.data();
+          const { month, day } = parseDate(data.date);
+          return {
+            id: doc.id,
+            title: data.title,
+            dateObj: data.date, // Keep original string
+            displayMonth: month,
+            displayDay: day,
+            category: "EVENT", // Default category as we don't have it in DB yet
+            image: data.image
+          };
+        });
+
+        // If "Ascending format" means Date Ascending (Upcoming), we should try to sort.
+        // But since date is free text, safe to stick with createdAt or just take them as is.
+        // Let's stick to the fetched order (Newest created first) which usually satisfies "replace previous".
+
+        setEvents(fetchedEvents);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-20 text-white">Loading events...</div>;
+  }
+
+  // If no events, hide section or show message? User didn't specify, but let's just render safe.
+  if (events.length === 0) {
+    return null; // Or return empty component
+  }
 
   return (
     <section className="px-6 py-12 bg-[#2E2E2E] text-white">
@@ -73,7 +106,7 @@ function Events() {
         <div className="block md:hidden">
           {events.map((event, index) => (
             <motion.div
-              key={index}
+              key={event.id}
               className="bg-gray-800 p-4 rounded-lg mb-6 text-center shadow-md"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -84,12 +117,16 @@ function Events() {
                 {event.category}
               </p>
               <h3 className="text-lg font-semibold mb-3">{event.title}</h3>
-              <img
-                src={event.image}
-                alt={event.title}
-                className="w-full rounded-lg mb-3"
-              />
-              <p className="text-sm text-gray-400">{event.date}</p>
+              {event.image && (
+                <div className="w-full aspect-video overflow-hidden rounded-lg mb-3">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <p className="text-sm text-gray-400">{event.dateObj}</p>
             </motion.div>
           ))}
         </div>
@@ -100,10 +137,9 @@ function Events() {
           <div className="space-y-4">
             {events.map((event, index) => (
               <motion.div
-                key={index}
-                className={`flex justify-between items-center hover:bg-[#ff0e40] p-4 border-b border-gray-700 cursor-pointer ${
-                  activeIndex === index ? "bg-gray-800" : ""
-                }`}
+                key={event.id}
+                className={`flex justify-between items-center hover:bg-[#ff0e40] p-4 border-b border-gray-700 cursor-pointer ${activeIndex === index ? "bg-gray-800" : ""
+                  }`}
                 onMouseEnter={() => setActiveIndex(index)}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -115,12 +151,12 @@ function Events() {
                 viewport={{ once: true, amount: 0.3 }}
               >
                 <div className="flex gap-4">
-                  <div className="text-center">
+                  <div className="text-center w-16">
                     <p className="text-sm text-gray-400">
-                      {event.date.split(" ")[0]}
+                      {event.displayMonth}
                     </p>
                     <p className="text-xl font-bold">
-                      {event.date.split(" ")[1]}
+                      {event.displayDay}
                     </p>
                   </div>
                   <div>
@@ -136,18 +172,32 @@ function Events() {
           </div>
 
           {/* Dynamic Image */}
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={events[activeIndex].image}
-              src={events[activeIndex].image}
-              alt={events[activeIndex].title}
-              className="w-full h-[500px] object-cover rounded-lg shadow-lg"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            />
-          </AnimatePresence>
+          <div className="relative w-full h-[500px] overflow-hidden rounded-lg shadow-lg">
+            <AnimatePresence mode="wait">
+              {events[activeIndex]?.image ? (
+                <motion.img
+                  key={events[activeIndex].image}
+                  src={events[activeIndex].image}
+                  alt={events[activeIndex].title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5 }}
+                />
+              ) : (
+                <motion.div
+                  key="placeholder"
+                  className="absolute inset-0 bg-gray-700 flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <span className="text-gray-500">No Image Available</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Button */}
