@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import churchLogo from "../assets/church-logo.png"; // ✅ make sure the path is correct
 
 function Footer() {
@@ -21,44 +22,44 @@ function Footer() {
           <h3 className="text-lg font-semibold mb-2">QUICK LINKS</h3>
           <ul className="space-y-1 text-sm">
             <li>
-              <a href="/" className="hover:text-pink-500">
+              <Link to="/" className="hover:text-pink-500">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/who-we-are" className="text-pink-600 font-medium">
+              <Link to="/who-we-are" className="text-pink-600 font-medium">
                 Who We Are
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/livestream" className="hover:text-pink-500">
                 Livestream
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/empire" className="hover:text-pink-500">
                 Empires (Branches)
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/events" className="hover:text-pink-500">
                 Events
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/resources" className="hover:text-pink-500">
                 Resources
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/sinners" className="hover:text-pink-500">
                 Salvation
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-pink-500">
+              <Link to="/giving" className="hover:text-pink-500">
                 Giving
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

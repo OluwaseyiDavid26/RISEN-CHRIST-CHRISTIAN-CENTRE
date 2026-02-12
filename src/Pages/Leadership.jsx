@@ -106,6 +106,8 @@
 // export default Leadership;
 import React from "react";
 import { motion } from "framer-motion";
+import Minlekan from "../assets/Minlekan.JPG";
+import Minpraise from "../assets/Minpraise.jpeg";
 
 const DRIVE_BASE_URL = "https://drive.google.com/thumbnail?id=";
 const DRIVE_SIZE = "&sz=w1000";
@@ -133,7 +135,7 @@ const pastors = [
       "Raji Babatunde Idowu is a preacher of the word of God, a fervent prayer warrior, and a counsellor. She is a children's minister and has been the Deputy Coordinator of the Boanerges Fellowship since 2009. She is a Business Educator by training, and she is joyfully married to Raji Bashir Babatunde. They are both blessed with many children both biological and spiritual.",
   },
   {
-    image: imageUrls.pst3,
+    image: Minlekan,
     title: "Resident Minister",
     name: "Minister Olapade Emmanuel Olalekan",
     description:
@@ -147,7 +149,7 @@ const pastors = [
       "Abe Tolushe holds an MB,BS degree in Medicine and Surgery from the University of Ilorin, Kwara State. He is happily married to Abimbola Abe, and they are blessed with two children, Emmanuella and Emmanuel.",
   },
   {
-    image: imageUrls.pst4,
+    image: Minpraise,
     title: "(HOD Visitation and Follow up)",
     name: "Minister Omorinoye Praise Yinjesu",
     description:
