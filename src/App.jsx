@@ -36,6 +36,7 @@ import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
 
 import Home from "./Components/Home.jsx";
+import AboutJesus from "./Pages/AboutJesus.jsx";
 import WhoPage from "./Pages/WhoPage.jsx";
 import Empire from "./Pages2/Empires.jsx";
 import Events from "./Pages3/Events.jsx";
@@ -72,6 +73,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about-jesus" element={<AboutJesus />} />
         <Route path="/who-we-are" element={<WhoPage />} />
         <Route path="/empire" element={<Empire />} />
         <Route path="/events" element={<Events />} />

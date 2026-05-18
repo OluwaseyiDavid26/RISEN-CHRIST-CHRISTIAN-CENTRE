@@ -6,102 +6,112 @@ function Hero() {
   const { scrollY } = useScroll();
   
   // Parallax effects optimized for performance
-  const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "20%"]);
-  const textY = useTransform(scrollY, [0, 800], ["0%", "40%"]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "15%"]);
+  const textY = useTransform(scrollY, [0, 800], ["0%", "30%"]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   useEffect(() => {
-    // Basic check for low-end devices to reduce animation overhead if needed
     const isMobile = window.innerWidth <= 768;
     const isLowPower = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
     setIsLowEnd(isMobile || isLowPower);
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-white flex items-center justify-center">
-      {/* Background Image with Parallax */}
+    <section className="relative w-full h-screen overflow-hidden bg-[#fcfbfa] flex items-center">
+      {/* Subtle top gradient overlay to ensure white navbar text remains readable */}
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black/40 via-black/10 to-transparent z-20 pointer-events-none" />
+
+      {/* Background/Left Column image - Hidden on mobile or set as background, styled on desktop */}
       <motion.div
-        className="absolute inset-0 z-0"
-        style={{ 
-          y: isLowEnd ? 0 : backgroundY,
-        }}
+        className="absolute inset-0 md:left-0 md:w-1/2 h-full z-0 overflow-hidden"
+        style={{ y: isLowEnd ? 0 : backgroundY }}
       >
+        {/* On Mobile: Subtle background overlay to avoid text overlapping */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000"
+          className="absolute inset-0 bg-no-repeat bg-contain bg-center md:bg-left opacity-15 md:opacity-100 transition-opacity duration-1000"
           style={{
-            backgroundImage: `url('/church_images/jesus_hero.png')`,
+            backgroundImage: `url('/church_images/jesus_sketch.jpg')`,
+            backgroundPosition: 'left center',
           }}
         />
-        {/* Light Heavenly Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/30 to-white/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-100/40 via-transparent to-transparent mix-blend-overlay" />
+        {/* Soft edge fading to blend the image perfectly with the light background */}
+        <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-[#fcfbfa]" />
       </motion.div>
 
-      {/* Hero Content */}
-      <motion.div 
-        className="relative z-10 text-center px-6 md:px-12 w-full max-w-6xl mx-auto mt-24"
-        style={{ 
-          y: isLowEnd ? 0 : textY,
-          opacity: opacity
-        }}
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-[#B8860B] font-medium tracking-[0.3em] uppercase text-sm md:text-base mb-6 drop-shadow-sm"
-        >
-          Welcome to the presence of God
-        </motion.p>
-        
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-playfair font-bold text-gray-900 leading-tight mb-8 drop-shadow-md"
-        >
-          RISEN CHRIST <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A017] to-[#B8860B]">
-            CHRISTIAN CENTRE
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-          className="text-gray-700 text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto font-light leading-relaxed mb-12 drop-shadow-sm"
-        >
-          Experience the power of His presence, a community of boundless love, and a place for spiritual renewal and divine encounter.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
-        >
-          <button className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-semibold uppercase tracking-widest text-sm rounded-full hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300 border border-[#D4AF37]/50">
-            Watch Messages
-          </button>
+      {/* Main Content Grid */}
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 w-full h-full flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 w-full gap-8">
           
-          <button className="w-full sm:w-auto px-10 py-4 bg-white/60 backdrop-blur-md border border-[#D4AF37]/30 text-[#B8860B] font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-white hover:shadow-[0_8px_25px_rgba(212,175,55,0.15)] hover:-translate-y-1 transition-all duration-300">
-            Join Us This Sunday
-          </button>
-        </motion.div>
-      </motion.div>
+          {/* Empty space on Left for desktop to allow the Jesus image to shine */}
+          <div className="hidden md:block md:col-span-5 lg:col-span-6" />
+
+          {/* Right Column: Text & Buttons (Absolutely clean and readable) */}
+          <motion.div 
+            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32"
+            style={{ 
+              opacity: opacity
+            }}
+          >
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="text-[#C5A017] font-semibold tracking-[0.25em] uppercase text-xs md:text-sm mb-4 drop-shadow-sm font-inter"
+            >
+              Welcome to the presence of God
+            </motion.p>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold text-gray-900 leading-tight mb-6"
+            >
+              RISEN CHRIST <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A017] to-[#B8860B]">
+                CHRISTIAN CENTRE
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+              className="text-gray-600 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto md:mx-0 font-outfit"
+            >
+              Experience the power of His presence, a community of boundless love, and a place for spiritual renewal and divine encounter.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
+            >
+              <button className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-bold uppercase tracking-widest text-xs rounded-full hover:shadow-[0_8px_20px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 transition-all duration-300">
+                Watch Messages
+              </button>
+              
+              <button className="w-full sm:w-auto px-8 py-3.5 bg-white border border-[#D4AF37]/40 text-[#B8860B] font-bold uppercase tracking-widest text-xs rounded-full hover:bg-[#fcfbfa] hover:shadow-[0_8px_20px_rgba(212,175,55,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                Join Us Sunday
+              </button>
+            </motion.div>
+          </motion.div>
+          
+        </div>
+      </div>
 
       {/* Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10"
       >
-        <span className="text-[#B8860B] text-xs uppercase tracking-[0.2em] mb-3 font-medium">Scroll to explore</span>
-        <div className="w-[1px] h-[50px] overflow-hidden relative bg-gray-200">
+        <span className="text-[#C5A017] text-[10px] uppercase tracking-[0.2em] mb-2 font-semibold">Scroll to explore</span>
+        <div className="w-[1px] h-[40px] overflow-hidden relative bg-gray-200">
           <motion.div
-            animate={{ y: [-50, 50] }}
+            animate={{ y: [-40, 40] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
             className="w-full h-full bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent absolute top-0"
           />

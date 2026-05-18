@@ -27,23 +27,27 @@ function Experience() {
     const match = url.match(regExp);
     return (match && match[2].length === 11)
       ? "https://www.youtube.com/embed/" + match[2]
-      : url; // Fallback to original if regex fails (though likely won't work if it's a standard watch link)
+      : url; 
   };
 
   return (
-    <section className="px-6 py-12 bg-gray-50">
-      <div className="w-full">
+    <section className="px-6 py-24 bg-[#fcfbfa]">
+      <div className="max-w-6xl mx-auto w-full">
         {/* Title + Paragraph */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <p className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4">
+            Connect Online
+          </p>
+          <h2 className="text-3xl md:text-5xl font-playfair font-bold text-gray-900 mb-6">
             Experience God’s Presence from Anywhere
           </h2>
-          <p className="text-lg text-gray-600 mb-6 max-w-xl mx-auto">
+          <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto font-outfit leading-relaxed">
             Can’t make it in person? Join us online and be part of our worship,
             teachings, and special events from wherever you are. Stay connected
             and grow in faith with our live-streamed services.
@@ -52,14 +56,15 @@ function Experience() {
 
         {/* Media Content: Live Stream Iframe OR Static Image */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="w-full max-w-6xl rounded-xl shadow-2xl mb-8 overflow-hidden bg-black aspect-video mx-auto"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          viewport={{ once: true }}
+          className="w-full rounded-2xl shadow-xl border border-gray-200 mb-8 overflow-hidden bg-gray-900 aspect-video relative"
         >
           {liveSettings?.link ? (
             <iframe
-              className="w-full h-full"
+              className="w-full h-full relative z-10"
               src={getEmbedUrl(liveSettings.link)}
               title="Live Stream"
               frameBorder="0"
@@ -67,38 +72,48 @@ function Experience() {
               allowFullScreen>
             </iframe>
           ) : (
-            <img
-              src={image10}
-              alt="Livestream"
-              className="w-full h-full object-cover"
-            />
+            <div className="relative w-full h-full group">
+              <img
+                src={image10}
+                alt="Livestream placeholder"
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                 <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center mb-4">
+                    <span className="text-4xl ml-2">▶</span>
+                 </div>
+                 <span className="text-white font-playfair text-xl tracking-wide font-medium">Service Offline</span>
+              </div>
+            </div>
           )}
         </motion.div>
 
         {/* Text / Status Info */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          viewport={{ once: true }}
         >
           {isLive && (
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></span>
-              <p className="text-xl font-bold text-red-600">LIVE NOW</p>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_red]"></span>
+              <p className="text-lg font-bold text-red-600 tracking-widest uppercase">LIVE NOW</p>
             </div>
           )}
         </motion.div>
 
-        {/* Button (Only show if NOT live, or maybe change text) */}
+        {/* Button */}
         {!isLive && (
           <motion.div
-            className="flex justify-center mt-10"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            <button className="bg-pink-600 text-white px-6 py-3 rounded hover:bg-pink-700 transition">
-              Join Livestream
+            <button className="px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-bold uppercase tracking-widest text-sm rounded-full hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300">
+              Watch Previous Services
             </button>
           </motion.div>
         )}

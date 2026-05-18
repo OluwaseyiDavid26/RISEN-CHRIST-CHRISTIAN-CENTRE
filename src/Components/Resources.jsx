@@ -77,7 +77,7 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
 
   return (
     <motion.div
-      className="flex justify-between items-center p-5 gap-4 glass-card hover:bg-[var(--color-gold-500)] cursor-pointer transition-all duration-300 group shadow-lg"
+      className="flex justify-between items-center p-5 gap-4 glass-card hover:bg-white hover:border-[#D4AF37] cursor-pointer transition-all duration-300 group shadow-sm hover:shadow-md"
       onMouseEnter={() => setHoveredItem(itemKey)}
       onMouseLeave={() => setHoveredItem(null)}
       initial={{ opacity: 0, y: 20 }}
@@ -87,12 +87,12 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
     >
       {/* Icon/Image Circle */}
       <motion.div
-        className="w-14 h-14 rounded-full bg-[#0a0a0a]/50 flex items-center justify-center overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-[#0a0a0a]/30 transition-colors"
+        className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0 border border-gray-200 group-hover:border-[#D4AF37] transition-colors"
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 300, damping: 15 }}
       >
         {isHovered && IconComponent ? (
-          <IconComponent size={24} className="text-[var(--color-gold-500)] group-hover:text-[#0a0a0a] transition-colors" />
+          <IconComponent size={24} className="text-[#D4AF37] transition-colors" />
         ) : (
           <img
             src={IMAGE_MAP[item.img]}
@@ -104,19 +104,17 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
 
       {/* Text Content */}
       <div className="flex-1 min-w-0">
-        <h4 className="text-lg font-playfair font-semibold text-white group-hover:text-[#0a0a0a] transition-colors duration-300 truncate">
+        <h4 className="text-lg font-playfair font-semibold text-gray-900 group-hover:text-[#D4AF37] transition-colors duration-300 truncate">
           {item.name}
         </h4>
-        <p className="text-xs tracking-wide text-gray-400 group-hover:text-[#0a0a0a]/80 transition-colors duration-300 mt-1">
+        <p className="text-xs tracking-wide text-gray-500 group-hover:text-gray-700 transition-colors duration-300 mt-1">
           {item.description}
         </p>
       </div>
 
       {/* Arrow */}
       <motion.span
-        className="text-2xl text-[var(--color-gold-500)] group-hover:text-[#0a0a0a] transition-colors duration-300 flex-shrink-0"
-        whileHover={{ x: 5 }}
-        transition={{ type: "tween", duration: 0.2 }}
+        className="text-2xl text-transparent group-hover:text-[#D4AF37] transition-all duration-300 flex-shrink-0 -translate-x-2 group-hover:translate-x-0"
         aria-hidden="true"
       >
         →
@@ -129,14 +127,14 @@ function Resources() {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   return (
-    <section className="px-4 sm:px-6 py-24 md:py-32 bg-[#0a0a0a] relative overflow-hidden">
+    <section className="px-4 sm:px-6 py-24 md:py-32 bg-[#fcfbfa] relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white/5 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-gray-100/50 to-transparent pointer-events-none" />
 
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
         <motion.p
-          className="text-[var(--color-gold-400)] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -146,7 +144,7 @@ function Resources() {
         </motion.p>
         
         <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -156,7 +154,7 @@ function Resources() {
         </motion.h2>
 
         <motion.p
-          className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
+          className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto font-outfit"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -179,7 +177,7 @@ function Resources() {
             viewport={{ once: true }}
           >
             {/* Category Title */}
-            <h3 className="text-xl md:text-2xl font-playfair font-bold text-white border-b border-white/10 pb-4">
+            <h3 className="text-xl md:text-2xl font-playfair font-bold text-gray-900 border-b border-gray-200 pb-4">
               {resource.title}
             </h3>
 

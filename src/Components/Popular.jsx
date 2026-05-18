@@ -13,40 +13,47 @@ function Popular() {
   ];
 
   return (
-    <section className="px-6 py-12">
-      <div className="w-full">
+    <section className="px-6 py-24 bg-white">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.h2
-          className="text-3xl font-bold text-gray-800 mb-8 text-left"
-          initial={{ opacity: 0, y: 50 }}
+        <motion.div
+          className="text-center md:text-left mb-12"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          Popular Branches
-        </motion.h2>
+          <p className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-2">
+            Locations
+          </p>
+          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900">
+            Popular Branches
+          </h2>
+        </motion.div>
 
         {/* Images Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {branches.map((branch, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center"
-              initial={{ opacity: 0, y: 60 }}
+              className="flex flex-col group cursor-pointer"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.6,
-                delay: index * 0.5, // Stagger based on index
+                delay: index * 0.1,
                 ease: "easeOut",
               }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.2 }}
             >
-              <img
-                src={branch.img}
-                alt={branch.name}
-                className="w-full h-[400px] object-cover rounded-lg shadow-md"
-              />
-              <h3 className="text-lg font-semibold text-gray-800 mt-2">
+              <div className="overflow-hidden rounded-2xl shadow-sm mb-4 border border-gray-100">
+                <img
+                  src={branch.img}
+                  alt={branch.name}
+                  className="w-full h-[350px] object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                />
+              </div>
+              <h3 className="text-lg font-playfair font-semibold text-gray-900 group-hover:text-[#D4AF37] transition-colors">
                 {branch.name}
               </h3>
             </motion.div>

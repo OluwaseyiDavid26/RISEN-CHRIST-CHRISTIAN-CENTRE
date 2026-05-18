@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "../firebase"; // Import db
+import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 
 function Events() {
@@ -52,7 +52,7 @@ function Events() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-24 bg-[#0a0a0a] text-white/50 text-sm tracking-widest uppercase">Loading events...</div>;
+    return <div className="text-center py-24 bg-[#fcfbfa] text-gray-400 text-sm tracking-widest uppercase">Loading events...</div>;
   }
 
   if (events.length === 0) {
@@ -60,14 +60,14 @@ function Events() {
   }
 
   return (
-    <section className="px-6 py-24 bg-[#0a0a0a] text-white relative">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-gold-500)]/5 blur-[150px] rounded-full pointer-events-none" />
+    <section className="px-6 py-24 bg-[#fcfbfa] text-gray-900 relative">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <motion.p
-            className="text-[var(--color-gold-400)] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+            className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -76,7 +76,7 @@ function Events() {
             Gatherings
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-white"
+            className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-gray-900"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -86,7 +86,7 @@ function Events() {
           </motion.h2>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-300 font-light leading-relaxed"
+            className="text-lg md:text-xl text-gray-600 font-light leading-relaxed font-outfit"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -103,13 +103,13 @@ function Events() {
           {events.map((event, index) => (
             <motion.div
               key={event.id}
-              className="glass-card p-6 mb-6 relative overflow-hidden group"
+              className="glass-card p-6 mb-6 relative overflow-hidden group border-gray-200 shadow-sm"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-gold-500)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10 flex flex-col gap-4">
                 {event.image && (
                   <div className="w-full aspect-video overflow-hidden rounded-xl">
@@ -122,11 +122,11 @@ function Events() {
                 )}
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-[var(--color-gold-500)] font-semibold mb-2">
+                    <p className="text-[10px] uppercase tracking-widest text-[#B8860B] font-semibold mb-2">
                       {event.category}
                     </p>
-                    <h3 className="text-xl font-playfair font-bold text-white mb-2">{event.title}</h3>
-                    <p className="text-sm text-gray-400 font-medium">{event.dateObj}</p>
+                    <h3 className="text-xl font-playfair font-bold text-gray-900 mb-2">{event.title}</h3>
+                    <p className="text-sm text-gray-500 font-medium">{event.dateObj}</p>
                   </div>
                 </div>
               </div>
@@ -142,7 +142,7 @@ function Events() {
               <motion.div
                 key={event.id}
                 className={`group flex items-center justify-between p-6 rounded-2xl cursor-pointer transition-all duration-300 border border-transparent ${
-                  activeIndex === index ? "bg-white/5 border-white/10 shadow-lg" : "hover:bg-white/5"
+                  activeIndex === index ? "bg-white border-gray-200 shadow-md" : "hover:bg-white/50"
                 }`}
                 onMouseEnter={() => setActiveIndex(index)}
                 initial={{ opacity: 0, x: -30 }}
@@ -156,23 +156,23 @@ function Events() {
               >
                 <div className="flex gap-6 items-center">
                   <div className="text-center w-16">
-                    <p className={`text-xs font-bold uppercase tracking-widest transition-colors ${activeIndex === index ? "text-[var(--color-gold-500)]" : "text-gray-500"}`}>
+                    <p className={`text-xs font-bold uppercase tracking-widest transition-colors ${activeIndex === index ? "text-[#B8860B]" : "text-gray-400"}`}>
                       {event.displayMonth}
                     </p>
-                    <p className={`text-3xl font-playfair font-bold transition-colors ${activeIndex === index ? "text-white" : "text-gray-400"}`}>
+                    <p className={`text-3xl font-playfair font-bold transition-colors ${activeIndex === index ? "text-gray-900" : "text-gray-400"}`}>
                       {event.displayDay}
                     </p>
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold mb-1">
+                    <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mb-1">
                       {event.category}
                     </p>
-                    <h3 className={`text-xl font-playfair font-semibold transition-colors ${activeIndex === index ? "text-white" : "text-gray-300 group-hover:text-white"}`}>
+                    <h3 className={`text-xl font-playfair font-semibold transition-colors ${activeIndex === index ? "text-gray-900" : "text-gray-600 group-hover:text-gray-900"}`}>
                       {event.title}
                     </h3>
                   </div>
                 </div>
-                <span className={`text-2xl transition-transform duration-300 ${activeIndex === index ? "text-[var(--color-gold-500)] translate-x-2" : "text-transparent -translate-x-4 group-hover:text-white/50 group-hover:translate-x-0"}`}>
+                <span className={`text-2xl transition-transform duration-300 ${activeIndex === index ? "text-[#B8860B] translate-x-2" : "text-transparent -translate-x-4 group-hover:text-gray-300 group-hover:translate-x-0"}`}>
                   &#8594;
                 </span>
               </motion.div>
@@ -180,7 +180,7 @@ function Events() {
           </div>
 
           {/* Dynamic Image */}
-          <div className="col-span-7 relative w-full h-[600px] overflow-hidden rounded-2xl glass-card">
+          <div className="col-span-7 relative w-full h-[600px] overflow-hidden rounded-2xl shadow-lg border border-gray-200">
             <AnimatePresence mode="wait">
               {events[activeIndex]?.image ? (
                 <motion.div
@@ -196,24 +196,24 @@ function Events() {
                     alt={events[activeIndex].title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-80" />
                   <div className="absolute bottom-10 left-10 right-10">
-                    <p className="text-[var(--color-gold-500)] text-sm font-semibold tracking-widest uppercase mb-2">{events[activeIndex].dateObj}</p>
+                    <p className="text-[#D4AF37] text-sm font-semibold tracking-widest uppercase mb-2 drop-shadow-md">{events[activeIndex].dateObj}</p>
                     <h3 className="text-4xl font-playfair font-bold text-white drop-shadow-lg">{events[activeIndex].title}</h3>
                   </div>
                 </motion.div>
               ) : (
                 <motion.div
                   key="placeholder"
-                  className="absolute inset-0 bg-white/5 flex flex-col items-center justify-center"
+                  className="absolute inset-0 bg-gray-50 flex flex-col items-center justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-4">
                      <span className="text-gray-400 text-2xl">📅</span>
                   </div>
-                  <span className="text-gray-500 font-medium tracking-widest uppercase text-sm">Event Details Pending</span>
+                  <span className="text-gray-400 font-medium tracking-widest uppercase text-sm">Event Details Pending</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -229,7 +229,7 @@ function Events() {
           viewport={{ once: true }}
         >
           <Link to="/events">
-            <button className="px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold uppercase tracking-widest text-sm rounded-full hover:bg-white hover:text-[#0a0a0a] hover:scale-105 transition-all duration-300">
+            <button className="px-10 py-4 bg-white border border-gray-300 text-gray-700 font-bold uppercase tracking-widest text-sm rounded-full hover:bg-gray-50 hover:text-gray-900 hover:shadow-md transition-all duration-300">
               View All Events
             </button>
           </Link>
