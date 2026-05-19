@@ -43,6 +43,7 @@ import Events from "./Pages3/Events.jsx";
 import Resources from "./Pages4/Resources.jsx";
 import Sinner from "./Pages5/Sinner.jsx";
 import Giving from "./Pages6/Giving.jsx";
+import ScrollToTop from "./Components/ScrollToTop.jsx";
 
 // ✅ Add these imports for individual resource pages
 import VideoMessages from "./Pages4/VideoMessages.jsx";
@@ -70,6 +71,7 @@ import CommitmentsManager from "./Pages/Admin/CommitmentsManager.jsx";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

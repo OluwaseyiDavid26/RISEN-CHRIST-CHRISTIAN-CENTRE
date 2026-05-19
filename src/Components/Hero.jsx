@@ -12,12 +12,13 @@ function Hero() {
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const isLowPower = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-    setIsLowEnd(isMobile || isLowPower);
+    setIsLowEnd(isMobile || isLowPower || isIOS);
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#fcfbfa] flex items-center">
+    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#fcfbfa] flex items-center">
       {/* Subtle top gradient overlay to ensure white navbar text remains readable */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black/40 via-black/10 to-transparent z-20 pointer-events-none" />
 
@@ -47,7 +48,7 @@ function Hero() {
 
           {/* Right Column: Text & Buttons (Absolutely clean and readable) */}
           <motion.div 
-            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32"
+            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16"
             style={{ 
               opacity: opacity
             }}
@@ -100,23 +101,6 @@ function Hero() {
           
         </div>
       </div>
-
-      {/* Scroll Down Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10"
-      >
-        <span className="text-[#C5A017] text-[10px] uppercase tracking-[0.2em] mb-2 font-semibold">Scroll to explore</span>
-        <div className="w-[1px] h-[40px] overflow-hidden relative bg-gray-200">
-          <motion.div
-            animate={{ y: [-40, 40] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            className="w-full h-full bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent absolute top-0"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }

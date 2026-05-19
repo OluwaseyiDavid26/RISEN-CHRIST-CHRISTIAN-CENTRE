@@ -98,14 +98,20 @@ function Footer() {
               Follow Us
             </h3>
             <div className="flex gap-4">
-              {["Facebook", "Instagram", "YouTube", "X"].map((social) => (
+              {[
+                { name: "Instagram", url: "https://www.instagram.com/thechristempireofficial", icon: "I" },
+                { name: "YouTube", url: "https://www.youtube.com/@thechristempire9287", icon: "Y" },
+                { name: "X", url: "https://x.com/TheChristEmpire", icon: "X" }
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#D4AF37] hover:text-white transition-all duration-300 text-xs font-bold text-gray-700"
-                  title={social}
+                  title={social.name}
                 >
-                  {social[0]}
+                  {social.icon}
                 </a>
               ))}
             </div>
