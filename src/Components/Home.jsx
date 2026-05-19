@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Hero from "../Components/Hero.jsx";
-import Hero2 from "../Components/Hero2.jsx";
 import Empires from "../Components/Empires.jsx";
 import Popular from "../Components/Popular.jsx";
 import Events from "../Components/Events.jsx";
 import Experience from "../Components/Experiences.jsx";
 import Resources from "../Components/Resources.jsx";
 import Salvation from "../Components/Salvation.jsx";
-import Salvation2 from "../Components/Salvation2.jsx";
 import Worship from "../Components/Worship.jsx";
+import Gallery from "../Components/Gallery.jsx";
 
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -33,16 +32,16 @@ function Home() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-[#0a0a0a]">
       {/* Live Stream Popup */}
       {showPopup && liveSettings?.isLive && liveSettings?.link && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-          <div className="bg-white rounded-lg shadow-2xl w-full max-w-4xl overflow-hidden relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a]/90 backdrop-blur-md p-4">
+          <div className="bg-[#121212] border border-white/10 rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden relative">
             <button
               onClick={() => setShowPopup(false)}
-              className="absolute top-2 right-2 p-2 bg-gray-200 rounded-full hover:bg-gray-300 z-10"
+              className="absolute top-4 right-4 p-2 bg-black/50 rounded-full hover:bg-[var(--color-gold-500)] hover:text-black text-white transition-all z-10"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
             <div className="aspect-video w-full">
               <iframe
@@ -55,11 +54,14 @@ function Home() {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-4 bg-red-600 text-white flex justify-between items-center">
-              <span className="font-bold text-lg animate-pulse">🔴 LIVE NOW</span>
+            <div className="p-4 bg-[var(--color-gold-500)] text-[#0a0a0a] flex justify-between items-center">
+              <span className="font-bold text-lg tracking-widest uppercase flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
+                LIVE NOW
+              </span>
               <button
                 onClick={() => setShowPopup(false)}
-                className="text-sm underline hover:text-gray-200"
+                className="text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors"
               >
                 Close
               </button>
@@ -69,14 +71,13 @@ function Home() {
       )}
 
       <Hero />
-      <Hero2 />
+      <Gallery />
       <Empires />
       <Popular />
       <Events />
       <Experience />
       <Resources />
       <Salvation />
-      <Salvation2 />
       <Worship />
     </div>
   );

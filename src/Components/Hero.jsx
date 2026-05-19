@@ -1,266 +1,105 @@
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Autoplay } from "swiper/modules";
-// import "swiper/css";
-// import "swiper/css/autoplay";
-// import { motion } from "framer-motion";
-
-// import pastor1 from "../assets/pastor-1.png";
-// import pastor2 from "../assets/pastor-2.png";
-// import pastor3 from "../assets/pastor-3.png";
-// import pastor4 from "../assets/pastor-4.png";
-// function Hero() {
-//   const heroImages = [
-//     {
-//       img: pastor1,
-//       caption: "Pastor E.H James",
-//       subcaption: "Mon May 17 2025",
-//     },
-//     {
-//       img: pastor2,
-//       caption: "Pastor Y.T Micheal",
-//       subcaption: "Sat Jan 25 2025 ",
-//     },
-//     { img: pastor3, caption: "Sunday Worship", subcaption: "Tue Mar 20 2025" },
-//     { img: pastor4, caption: "Music Festival", subcaption: "Wed 13 Feb 2025" },
-//   ];
-
-//   return (
-//     <section className="text-center py-12 bg-white">
-//       <motion.h1
-//         className="text-5xl font-playfair font-light text-gray-800 mb-8 mt-8"
-//         initial={{ opacity: 0, y: -50 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 1 }}
-//       >
-//         WELCOME TO THE RISEN <br /> CHRIST CHRISTIAN <br /> CENTRE
-//       </motion.h1>
-
-//       {/* <h1 className="text-5xl  font-playfair font-light text-gray-800 mb-8 mt-8">
-//         WELCOME TO THE RISEN CHRIST CHRISTIAN <br /> CENTRE
-//       </h1> */}
-
-//       {/* <h1 className="text-5xl md:text-5xl font-bold font-play text-gray-800 mb-8 mt-8">
-//         WELCOME TO THE RISEN CHRIST CHRISTIAN CENTRE
-//       </h1> */}
-//       <div className="flex justify-center">
-//         <button className="flex items-center gap-2 bg-pink-600 text-white p-4 rounded hover:bg-pink-700 transition mt-6 mb-10">
-//           <svg
-//             xmlns="http://www.w3.org/2000/svg"
-//             className="w-5 h-5"
-//             fill="currentColor"
-//             viewBox="0 0 24 24"
-//           >
-//             <path d="M10 16.5V7.5L16 12L10 16.5Z" />
-//           </svg>
-//           <span>Watch Messages</span>
-//         </button>
-//       </div>
-
-//       {/* <button className="bg-pink-600 text-white px-6 py-3 rounded hover:bg-pink-700 transition mt-6 mb-10">
-//         🎥 Watch Messages
-//       </button> */}
-
-//       {/* Swiper Carousel */}
-//       <div className="w-full">
-//         <Swiper
-//           modules={[Autoplay]}
-//           spaceBetween={30}
-//           slidesPerView="auto"
-//           loop={true}
-//           speed={5000}
-//           autoplay={{
-//             delay: 0,
-//             disableOnInteraction: false,
-//           }}
-//           freeMode={true}
-//           freeModeMomentum={false}
-//           grabCursor={true}
-//         >
-//           {[...heroImages, ...heroImages].map(
-//             ({ img, caption, subcaption }, index) => (
-//               <SwiperSlide key={index} style={{ width: "300px" }}>
-//                 <div className="flex flex-col items-start">
-//                   <img
-//                     src={img}
-//                     alt={`Hero Slide ${index + 1}`}
-//                     className="w-full h-[420px] rounded-t-full object-cover shadow-lg"
-//                   />
-//                   <p className="mt-2 font-semibold text-black-200">{caption}</p>
-//                   <p className="mt-2 text-black-200">{subcaption}</p>
-//                 </div>
-//               </SwiperSlide>
-//             )
-//           )}
-//         </Swiper>
-//       </div>
-//     </section>
-//   );
-// }
-
-// export default Hero;
-
-import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-// Base URL for Google Drive images (using thumbnail format)
-const DRIVE_BASE_URL = "https://drive.google.com/thumbnail?id=";
-const DRIVE_SIZE = "&sz=w2000"; // High resolution
-
-const imageUrls = {
-  impartation1: `${DRIVE_BASE_URL}1Bs5Fjbllklq4QEioqs1yyWuty7-xB_Gu${DRIVE_SIZE}`,
-  impartation2: `${DRIVE_BASE_URL}1skyMpIbImkxiL1oI0GiVTAxrqq_L2tUx${DRIVE_SIZE}`,
-  impartation3: `${DRIVE_BASE_URL}1UJdmr6qV8WUA9IsbRT545muMTGRDPNWJ${DRIVE_SIZE}`,
-  impartation4: `${DRIVE_BASE_URL}1r_q1cI94diPa78tcuKeeaoxL3yNT4XSC${DRIVE_SIZE}`,
-  impartation5: `${DRIVE_BASE_URL}1DM7Mxbu0Upk8NzJNpmU1s7xoP2TKyb3S${DRIVE_SIZE}`,
-  impartation6: `${DRIVE_BASE_URL}1s2WrKFju1SfVSURfkSvWeIrEA8_DevYQ${DRIVE_SIZE}`,
-};
+import React, { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLowEnd, setIsLowEnd] = useState(false);
+  const { scrollY } = useScroll();
+  
+  // Parallax effects optimized for performance
+  const backgroundY = useTransform(scrollY, [0, 1000], ["0%", "15%"]);
+  const textY = useTransform(scrollY, [0, 800], ["0%", "30%"]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
-  const slides = [
-    {
-      image: imageUrls.impartation1,
-      title: "Impartation Service",
-      description:
-        "Experience the power of God's presence and receive fresh anointing",
-      date: "Every First Sunday",
-    },
-    {
-      image: imageUrls.impartation2,
-      title: "Impartation Service",
-      description: "A time of spiritual renewal and divine encounter",
-      date: "Every First Sunday",
-    },
-    {
-      image: imageUrls.impartation3,
-      title: "Dress Down Service",
-      description: "Come as you are and worship in comfort and community",
-      date: "Every Last Sunday",
-    },
-    {
-      image: imageUrls.impartation4,
-      title: "Dress Down Service",
-      description: "Casual worship with the same powerful presence",
-      date: "Every Last Sunday",
-    },
-    {
-      image: imageUrls.impartation5,
-      title: "Communion Sunday",
-      description: "Remember His sacrifice and celebrate His love together",
-      date: "Second Sunday Monthly",
-    },
-    {
-      image: imageUrls.impartation6,
-      title: "Communion Sunday",
-      description: "Partake in the body and blood of our Lord Jesus Christ",
-      date: "Second Sunday Monthly",
-    },
-  ];
-
-  // Auto-slide effect - slower timing for 6 slides
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 7000); // 7 seconds per slide
-
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  const goToPrevious = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const goToNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+    const isMobile = window.innerWidth <= 768;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isLowPower = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    setIsLowEnd(isMobile || isLowPower || isIOS);
+  }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* Slides */}
-      {slides.map((slide, index) => (
+    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#fcfbfa] flex items-center">
+      {/* Subtle top gradient overlay to ensure white navbar text remains readable */}
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black/40 via-black/10 to-transparent z-20 pointer-events-none" />
+
+      {/* Background/Left Column image - Hidden on mobile or set as background, styled on desktop */}
+      <motion.div
+        className="absolute inset-0 md:left-0 md:w-1/2 h-full z-0 overflow-hidden"
+        style={{ y: isLowEnd ? 0 : backgroundY }}
+      >
+        {/* On Mobile: Subtle background overlay to avoid text overlapping */}
         <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
+          className="absolute inset-0 bg-no-repeat bg-contain bg-center md:bg-left opacity-15 md:opacity-100 transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url('/church_images/jesus_sketch.jpg')`,
+            backgroundPosition: 'left center',
+          }}
+        />
+        {/* Soft edge fading to blend the image perfectly with the light background */}
+        <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-[#fcfbfa]" />
+      </motion.div>
+
+      {/* Main Content Grid */}
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 w-full h-full flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 w-full gap-8">
+          
+          {/* Empty space on Left for desktop to allow the Jesus image to shine */}
+          <div className="hidden md:block md:col-span-5 lg:col-span-6" />
+
+          {/* Right Column: Text & Buttons (Absolutely clean and readable) */}
+          <motion.div 
+            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16"
+            style={{ 
+              opacity: opacity
+            }}
           >
-            {/* Dark Overlay - Made darker for better readability */}
-            <div className="absolute inset-0 bg-black/60"></div>
-          </div>
-
-          {/* Content */}
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-              WELCOME TO THE RISEN CHRIST CHRISTIAN CENTRE
-            </h1>
-
-            <div className="mt-4 sm:mt-8 space-y-2 sm:space-y-4">
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold">
-                {slide.title}
-              </h2>
-              <p className="text-base sm:text-xl md:text-2xl max-w-2xl mx-auto px-2">
-                {slide.description}
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-pink-300">
-                {slide.date}
-              </p>
-            </div>
-
-            <button className="mt-6 sm:mt-10 flex items-center gap-2 bg-pink-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg hover:bg-pink-700 transition-all transform hover:scale-105">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 sm:w-6 sm:h-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M10 16.5V7.5L16 12L10 16.5Z" />
-              </svg>
-              <span className="text-base sm:text-lg font-semibold">
-                Watch Messages
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="text-[#C5A017] font-semibold tracking-[0.25em] uppercase text-xs md:text-sm mb-4 drop-shadow-sm font-inter"
+            >
+              Welcome to the presence of God
+            </motion.p>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold text-gray-900 leading-tight mb-6"
+            >
+              RISEN CHRIST <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A017] to-[#B8860B]">
+                CHRISTIAN CENTRE
               </span>
-            </button>
-          </div>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+              className="text-gray-600 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto md:mx-0 font-outfit"
+            >
+              Experience the power of His presence, a community of boundless love, and a place for spiritual renewal and divine encounter.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
+            >
+              <button className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-bold uppercase tracking-widest text-xs rounded-full hover:shadow-[0_8px_20px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 transition-all duration-300">
+                Watch Messages
+              </button>
+              
+              <button className="w-full sm:w-auto px-8 py-3.5 bg-white border border-[#D4AF37]/40 text-[#B8860B] font-bold uppercase tracking-widest text-xs rounded-full hover:bg-[#fcfbfa] hover:shadow-[0_8px_20px_rgba(212,175,55,0.1)] hover:-translate-y-0.5 transition-all duration-300">
+                Join Us Sunday
+              </button>
+            </motion.div>
+          </motion.div>
+          
         </div>
-      ))}
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 transition z-10"
-      >
-        <ChevronLeft size={32} />
-      </button>
-
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 transition z-10"
-      >
-        <ChevronRight size={32} />
-      </button>
-
-      {/* Slide Indicators (Dots) */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-              index === currentSlide
-                ? "bg-pink-600"
-                : "bg-white/50 hover:bg-white"
-            }`}
-          ></button>
-        ))}
       </div>
     </section>
   );

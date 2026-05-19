@@ -1,16 +1,43 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
-.font-playfair {
-  font-family: "Playfair Display", serif;
+
+@theme {
+  --color-gold-400: #F3CA52;
+  --color-gold-500: #E6B93D;
+  --color-gold-600: #C29A2E;
+  
+  --color-dark-900: #0a0a0a;
+  --color-dark-800: #121212;
+  --color-dark-700: #1a1a1a;
+  
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
 }
+
 body {
   font-family: "Inter", sans-serif;
+  background-color: #fcfbfa;
+  color: #111827; /* text-gray-900 */
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow;
+}
+
+/* Hide scrollbar for gallery and smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
