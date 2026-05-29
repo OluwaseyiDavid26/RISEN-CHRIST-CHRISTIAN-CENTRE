@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "../firebase"; // Import db
+import { db } from "../firebase";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 
 function Events() {
@@ -9,12 +9,10 @@ function Events() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Helper to parse date string "March 15, 2025" -> { month: "MAR", day: "15" }
   const parseDate = (dateStr) => {
     try {
       const d = new Date(dateStr);
       if (isNaN(d)) {
-        // Fallback if Date parsing fails or for formats like "Every Sunday"
         return { month: "EVENT", day: "" };
       }
       const month = d.toLocaleString('default', { month: 'short' }).toUpperCase();
@@ -28,14 +26,6 @@ function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        // Fetch specific fields? No, just get all and map
-        // Ordering by 'createdAt' desc ensures new events replace previous ones in the sense of being top of list? 
-        // Or user said "ascending format" -> likely by date? 
-        // Since date is string, sorting by date is hard. 
-        // Let's sort by createdAt desc (Newest created first) as "New event should replace previous" usually implies LIFO or standard blog feed style.
-        // Wait, "possibly assending format" usually means Date Ascending (Upcoming -> Future).
-        // Getting them by createdAt for now, we can sort client side if needed.
-
         const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         const fetchedEvents = querySnapshot.docs.map(doc => {
@@ -44,18 +34,13 @@ function Events() {
           return {
             id: doc.id,
             title: data.title,
-            dateObj: data.date, // Keep original string
+            dateObj: data.date,
             displayMonth: month,
             displayDay: day,
-            category: "EVENT", // Default category as we don't have it in DB yet
+            category: "EVENT",
             image: data.image
           };
         });
-
-        // If "Ascending format" means Date Ascending (Upcoming), we should try to sort.
-        // But since date is free text, safe to stick with createdAt or just take them as is.
-        // Let's stick to the fetched order (Newest created first) which usually satisfies "replace previous".
-
         setEvents(fetchedEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -63,137 +48,172 @@ function Events() {
         setLoading(false);
       }
     };
-
     fetchEvents();
   }, []);
 
   if (loading) {
-    return <div className="text-center py-20 text-white">Loading events...</div>;
+    return <div className="text-center py-24 bg-[#fcfbfa] text-gray-400 text-sm tracking-widest uppercase">Loading events...</div>;
   }
 
-  // If no events, hide section or show message? User didn't specify, but let's just render safe.
   if (events.length === 0) {
-    return null; // Or return empty component
+    return null;
   }
 
   return (
-    <section className="px-6 py-12 bg-[#2E2E2E] text-white">
-      <div className="w-full">
+    <section className="px-6 py-24 bg-[#fcfbfa] text-gray-900 relative">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <motion.h2
-          className="text-4xl font-bold mb-2 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Events
-        </motion.h2>
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <motion.p
+            className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Gatherings
+          </motion.p>
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-gray-900"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Upcoming Events
+          </motion.h2>
 
-        <motion.p
-          className="text-center text-2xl text-gray-300 mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Join us for life-changing gatherings designed to strengthen your
-          faith, build community, and experience God’s presence like never
-          before.
-        </motion.p>
+          <motion.p
+            className="text-lg md:text-xl text-gray-600 font-light leading-relaxed font-outfit"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Join us for life-changing gatherings designed to strengthen your
+            faith, build community, and experience God’s presence like never
+            before.
+          </motion.p>
+        </div>
 
-        {/* -------- MOBILE VIEW (STACKED BABY CARDS) -------- */}
-        <div className="block md:hidden">
+        {/* -------- MOBILE VIEW (STACKED CARDS) -------- */}
+        <div className="block lg:hidden">
           {events.map((event, index) => (
             <motion.div
               key={event.id}
-              className="bg-gray-800 p-4 rounded-lg mb-6 text-center shadow-md"
+              className="glass-card p-6 mb-6 relative overflow-hidden group border-gray-200 shadow-sm"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.15 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <p className="text-xs uppercase text-gray-400 mb-1">
-                {event.category}
-              </p>
-              <h3 className="text-lg font-semibold mb-3">{event.title}</h3>
-              {event.image && (
-                <div className="w-full aspect-video overflow-hidden rounded-lg mb-3">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                  />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10 flex flex-col gap-4">
+                {event.image && (
+                  <div className="w-full aspect-video overflow-hidden rounded-xl">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                )}
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-[#B8860B] font-semibold mb-2">
+                      {event.category}
+                    </p>
+                    <h3 className="text-xl font-playfair font-bold text-gray-900 mb-2">{event.title}</h3>
+                    <p className="text-sm text-gray-500 font-medium">{event.dateObj}</p>
+                  </div>
                 </div>
-              )}
-              <p className="text-sm text-gray-400">{event.dateObj}</p>
+              </div>
             </motion.div>
           ))}
         </div>
 
         {/* -------- DESKTOP VIEW (HOVER + IMAGE) -------- */}
-        <div className="hidden md:grid md:grid-cols-2 gap-8">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-12 items-center">
           {/* Event List */}
-          <div className="space-y-4">
+          <div className="col-span-5 space-y-4">
             {events.map((event, index) => (
               <motion.div
                 key={event.id}
-                className={`flex justify-between items-center hover:bg-[#ff0e40] p-4 border-b border-gray-700 cursor-pointer ${activeIndex === index ? "bg-gray-800" : ""
-                  }`}
+                className={`group flex items-center justify-between p-6 rounded-2xl cursor-pointer transition-all duration-300 border border-transparent ${
+                  activeIndex === index ? "bg-white border-gray-200 shadow-md" : "hover:bg-white/50"
+                }`}
                 onMouseEnter={() => setActiveIndex(index)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{
-                  duration: 0.4,
-                  delay: index * 0.15,
+                  duration: 0.5,
+                  delay: index * 0.1,
                   ease: "easeOut",
                 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true }}
               >
-                <div className="flex gap-4">
+                <div className="flex gap-6 items-center">
                   <div className="text-center w-16">
-                    <p className="text-sm text-gray-400">
+                    <p className={`text-xs font-bold uppercase tracking-widest transition-colors ${activeIndex === index ? "text-[#B8860B]" : "text-gray-400"}`}>
                       {event.displayMonth}
                     </p>
-                    <p className="text-xl font-bold">
+                    <p className={`text-3xl font-playfair font-bold transition-colors ${activeIndex === index ? "text-gray-900" : "text-gray-400"}`}>
                       {event.displayDay}
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-400">
+                    <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mb-1">
                       {event.category}
                     </p>
-                    <h3 className="text-lg font-semibold">{event.title}</h3>
+                    <h3 className={`text-xl font-playfair font-semibold transition-colors ${activeIndex === index ? "text-gray-900" : "text-gray-600 group-hover:text-gray-900"}`}>
+                      {event.title}
+                    </h3>
                   </div>
                 </div>
-                <span className="text-xl">&#8594;</span>
+                <span className={`text-2xl transition-transform duration-300 ${activeIndex === index ? "text-[#B8860B] translate-x-2" : "text-transparent -translate-x-4 group-hover:text-gray-300 group-hover:translate-x-0"}`}>
+                  &#8594;
+                </span>
               </motion.div>
             ))}
           </div>
 
           {/* Dynamic Image */}
-          <div className="relative w-full h-[500px] overflow-hidden rounded-lg shadow-lg">
+          <div className="col-span-7 relative w-full h-[600px] overflow-hidden rounded-2xl shadow-lg border border-gray-200">
             <AnimatePresence mode="wait">
               {events[activeIndex]?.image ? (
-                <motion.img
+                <motion.div
                   key={events[activeIndex].image}
-                  src={events[activeIndex].image}
-                  alt={events[activeIndex].title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
-                />
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={events[activeIndex].image}
+                    alt={events[activeIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-80" />
+                  <div className="absolute bottom-10 left-10 right-10">
+                    <p className="text-[#D4AF37] text-sm font-semibold tracking-widest uppercase mb-2 drop-shadow-md">{events[activeIndex].dateObj}</p>
+                    <h3 className="text-4xl font-playfair font-bold text-white drop-shadow-lg">{events[activeIndex].title}</h3>
+                  </div>
+                </motion.div>
               ) : (
                 <motion.div
                   key="placeholder"
-                  className="absolute inset-0 bg-gray-700 flex items-center justify-center"
+                  className="absolute inset-0 bg-gray-50 flex flex-col items-center justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <span className="text-gray-500">No Image Available</span>
+                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-4">
+                     <span className="text-gray-400 text-2xl">📅</span>
+                  </div>
+                  <span className="text-gray-400 font-medium tracking-widest uppercase text-sm">Event Details Pending</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -202,14 +222,14 @@ function Events() {
 
         {/* Button */}
         <motion.div
-          className="flex justify-center mt-10"
+          className="flex justify-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
           viewport={{ once: true }}
         >
           <Link to="/events">
-            <button className="border bg-[#ff0e40] border-gray-800 px-6 py-3 rounded hover:bg-gray-600 hover:text-white transition">
+            <button className="px-10 py-4 bg-white border border-gray-300 text-gray-700 font-bold uppercase tracking-widest text-sm rounded-full hover:bg-gray-50 hover:text-gray-900 hover:shadow-md transition-all duration-300">
               View All Events
             </button>
           </Link>

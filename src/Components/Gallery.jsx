@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 
-// Automatically imported images list
+// Automatically imported images list (simulated array of all images in the folder)
 const images = [
   "/church_images/WhatsApp Image 2026-05-13 at 11.43.20 PM (1).jpeg",
   "/church_images/WhatsApp Image 2026-05-13 at 11.43.20 PM.jpeg",
@@ -39,18 +38,16 @@ const images = [
   "/church_images/WhatsApp Image 2026-05-13 at 11.43.43 PM.jpeg"
 ];
 
-function PhotoGallery() {
+function Gallery() {
   const [selectedImg, setSelectedImg] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(16);
-  const navigate = useNavigate();
 
-  const loadMore = () => {
-    setVisibleCount(prev => Math.min(prev + 12, images.length));
-  };
+  // Show only 8 images for the preview on the homepage
+  const previewImages = images.slice(0, 8);
 
   return (
-    <section className="px-6 py-32 bg-[#fcfbfa] min-h-screen relative">
-      <div className="absolute top-1/2 left-0 w-full h-[400px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none -translate-y-1/2" />
+    <section className="px-6 py-24 bg-white relative border-y border-gray-100">
+      {/* Background decorations */}
+      <div className="absolute top-1/2 left-0 w-full h-[300px] bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -58,35 +55,38 @@ function PhotoGallery() {
           <motion.p
             className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            Resources / Photos
+            Memories
           </motion.p>
-          <motion.h1
+          <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-gray-900"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
           >
-            Full Photo Gallery
-          </motion.h1>
+            Church Life Gallery
+          </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-600 font-light leading-relaxed font-outfit"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            Relive powerful moments, joyful worship, and the vibrant life of our church community.
+            A glimpse into the life, worship, and joy of our vibrant congregation.
           </motion.p>
         </div>
 
-        {/* Masonry Grid */}
+        {/* Masonry Grid Preview */}
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-          {images.slice(0, visibleCount).map((img, index) => (
+          {previewImages.map((img, index) => (
             <motion.div
               key={img}
-              className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card shadow-sm border border-gray-100 bg-white"
+              className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card shadow-sm border border-gray-100 bg-gray-50"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: (index % 8) * 0.1 }}
@@ -96,11 +96,12 @@ function PhotoGallery() {
               <div className="w-full relative overflow-hidden">
                 <img
                   src={img}
-                  alt={`Gallery Image ${index + 1}`}
+                  alt={`Church Life ${index + 1}`}
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
                   loading="lazy"
                 />
               </div>
+              {/* Overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                  <div className="flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center">
@@ -113,32 +114,20 @@ function PhotoGallery() {
           ))}
         </div>
 
-        {/* Load More Button */}
-        {visibleCount < images.length && (
-           <motion.div 
-             className="flex justify-center mt-12"
-             initial={{ opacity: 0 }}
-             whileInView={{ opacity: 1 }}
-             viewport={{ once: true }}
-           >
-              <button 
-                onClick={loadMore}
-                className="px-8 py-3 bg-white border border-gray-200 text-gray-700 font-semibold uppercase tracking-widest text-xs rounded-full hover:bg-gray-50 hover:text-gray-900 transition-all shadow-sm"
-              >
-                Load More Photos
-              </button>
-           </motion.div>
-        )}
-
-        {/* Back Button */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => navigate(-1)}
-            className="text-gray-500 hover:text-[#D4AF37] text-sm uppercase tracking-widest font-semibold transition-colors"
+        {/* Link to Full Gallery */}
+        <motion.div 
+          className="flex justify-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <a 
+            href="/photo-gallery"
+            className="px-8 py-3 bg-white border border-gray-200 text-gray-700 font-semibold uppercase tracking-widest text-xs rounded-full hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-all shadow-sm"
           >
-            ← Back
-          </button>
-        </div>
+            View Full Gallery
+          </a>
+        </motion.div>
       </div>
 
       {/* Lightbox */}
@@ -153,7 +142,7 @@ function PhotoGallery() {
             onClick={() => setSelectedImg(null)}
           >
             <button 
-              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10 z-[110]"
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10"
               onClick={() => setSelectedImg(null)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -175,4 +164,4 @@ function PhotoGallery() {
   );
 }
 
-export default PhotoGallery;
+export default Gallery;
