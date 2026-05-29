@@ -25,7 +25,9 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-white border-t border-gray-100 pt-20 pb-8 text-gray-600 relative overflow-hidden">
+    <footer className="bg-white pt-20 pb-8 text-gray-600 relative overflow-hidden">
+      {/* Visible gold top accent bar */}
+      <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
       {/* Decorative gradient */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[200px] bg-gold-400/5 blur-[100px] rounded-full pointer-events-none" />
 

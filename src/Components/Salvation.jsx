@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 function Salvation() {
   return (
-    <section className="w-full py-28 px-6 bg-white text-center relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[300px] bg-gold-400/5 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute top-12 right-12 w-20 h-20 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+    <section className="w-full py-28 px-6 bg-dark-900 text-center relative overflow-hidden">
+      {/* Subtle gold ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold-400/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-12 right-12 w-20 h-20 border border-gold-400/15 rounded-full pointer-events-none hidden lg:block" />
 
       <div className="max-w-3xl mx-auto relative z-10">
         {/* Decorative gold line */}
@@ -18,7 +19,7 @@ function Salvation() {
         />
 
         <motion.p
-           className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
+           className="text-gold-400 text-sm uppercase tracking-widest font-semibold mb-4"
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.6 }}
@@ -29,7 +30,7 @@ function Salvation() {
 
         {/* Heading */}
         <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -40,7 +41,7 @@ function Salvation() {
 
         {/* Paragraph */}
         <motion.p
-          className="text-lg md:text-xl text-gray-600 font-light leading-relaxed mb-10 max-w-2xl mx-auto"
+          className="text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -48,7 +49,7 @@ function Salvation() {
         >
           No matter who you are or what you&rsquo;ve been through, God&rsquo;s love is for
           you. Jesus died for your sins so you can have a new life in Him.
-          Today, you can make the most important decision of your life—
+          Today, you can make the most important decision of your life&mdash;
           accepting Jesus Christ as your Lord and Savior.
         </motion.p>
 
@@ -59,7 +60,7 @@ function Salvation() {
            viewport={{ once: true }}
         >
           <Link to="/sinners">
-            <button className="btn-ghost">
+            <button className="inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-dark-900 font-semibold text-sm rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:scale-[0.98]">
               Pray the Sinner&rsquo;s Prayer
             </button>
           </Link>

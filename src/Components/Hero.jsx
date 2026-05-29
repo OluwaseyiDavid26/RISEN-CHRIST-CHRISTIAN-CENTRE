@@ -20,7 +20,7 @@ function Hero() {
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden bg-cream-50 flex items-center">
       {/* Top gradient for navbar readability */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black/40 via-black/10 to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-black/60 via-black/25 to-transparent z-20 pointer-events-none" />
 
       {/* Decorative floating shapes */}
       {!prefersReducedMotion && (
@@ -38,21 +38,25 @@ function Hero() {
         </>
       )}
 
-      {/* Background image — left half, asymmetric with pastor photo */}
+      {/* Background image — left side, sharp edge with gold accent line */}
       <motion.div
         className="absolute inset-0 md:left-0 md:w-[55%] h-full z-0 overflow-hidden"
         style={{ y: prefersReducedMotion ? 0 : useTransform(scrollY, [0, 1000], ["0%", "15%"]) }}
       >
-        <div className="absolute inset-0 bg-dark-900/60 md:bg-transparent z-10 md:z-0" />
+        {/* Mobile dark overlay for text readability */}
+        <div className="absolute inset-0 bg-dark-900/50 md:bg-transparent z-10 md:z-0" />
         <div
-          className="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-100 transition-opacity duration-1000"
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
           style={{
             backgroundImage: `url('${pastorImg}')`,
           }}
         />
-        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 bg-gradient-to-r from-transparent to-cream-50" />
-        <div className="hidden md:block absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-dark-900/30 to-transparent" />
       </motion.div>
+
+      {/* Sharp vertical gold accent line — the separator */}
+      <div className="hidden md:block absolute top-0 left-[55%] h-full z-10 pointer-events-none">
+        <div className="h-full w-[3px] bg-gold-400/80 shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
+      </div>
 
       {/* Content — offset right */}
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10 w-full h-full flex items-center">

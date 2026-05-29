@@ -72,6 +72,10 @@ function Home() {
       )}
 
       <Hero />
+
+      {/* Prominent gold section divider */}
+      <div className="h-[3px] bg-gradient-to-r from-transparent via-gold-400 to-transparent w-full" />
+
       <Gallery />
       <Empires />
       <Popular />
@@ -79,6 +83,10 @@ function Home() {
       <Experience />
       <Resources />
       <Salvation />
+
+      {/* Prominent gold section divider before Worship */}
+      <div className="h-[3px] bg-gradient-to-r from-transparent via-gold-400 to-transparent w-full" />
+
       <Worship />
     </div>
   );

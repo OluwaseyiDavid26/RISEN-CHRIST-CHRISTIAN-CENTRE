@@ -28,22 +28,30 @@ function Navbar() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)] py-3" : "bg-transparent py-6"
+        scrolled
+          ? "bg-white/95 backdrop-blur-md border-b border-gold-400/30 py-3"
+          : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group focus-visible:rounded-lg focus-ring">
-          <div className="bg-gray-900/5 p-1.5 rounded-full backdrop-blur-sm group-hover:bg-gray-900/10 transition-all border border-gray-900/5">
+          <div className={`p-1.5 rounded-full backdrop-blur-sm transition-all border ${
+            scrolled
+              ? "bg-gray-900/5 border-gray-900/5 group-hover:bg-gray-900/10"
+              : "bg-white/15 border-white/20 group-hover:bg-white/25"
+          }`}>
              <img src={logo} alt="Risen Christ Christian Centre Logo" className="w-[50px] h-[50px] object-contain" />
           </div>
-          <span className="font-playfair font-bold text-xl hidden sm:block tracking-tight text-gray-900 group-hover:text-gold-400 transition-colors duration-300">
+          <span className={`font-playfair font-bold text-xl hidden sm:block tracking-tight group-hover:text-gold-400 transition-colors duration-300 ${
+            scrolled ? "text-gray-900" : "text-white"
+          }`}>
             Risen Christ
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700">
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -51,7 +59,11 @@ function Navbar() {
                 key={link.name}
                 to={link.path}
                 className={`relative py-1 transition-colors duration-300 focus-visible:rounded focus-ring ${
-                  isActive ? "text-gold-500" : "hover:text-gold-500"
+                  isActive
+                    ? "text-gold-400"
+                    : scrolled
+                      ? "text-gray-700 hover:text-gold-500"
+                      : "text-white/90 hover:text-gold-400"
                 }`}
               >
                 {link.name}
@@ -67,7 +79,9 @@ function Navbar() {
         <div className="hidden lg:flex gap-4 items-center">
           <Link
             to="/sinners"
-            className="text-sm font-medium text-gray-600 hover:text-gold-500 transition-colors focus-visible:rounded focus-ring px-2 py-1"
+            className={`text-sm font-medium transition-colors focus-visible:rounded focus-ring px-2 py-1 ${
+              scrolled ? "text-gray-600 hover:text-gold-500" : "text-white/80 hover:text-gold-400"
+            }`}
           >
             Sinner Prayer
           </Link>
@@ -81,7 +95,11 @@ function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-gray-900 p-2 rounded-lg hover:bg-gray-100 active:scale-95 transition-all focus-visible:rounded focus-ring"
+          className={`lg:hidden p-2 rounded-lg active:scale-95 transition-all focus-visible:rounded focus-ring ${
+            scrolled
+              ? "text-gray-900 hover:bg-gray-100"
+              : "text-white hover:bg-white/10"
+          }`}
           onClick={toggleMenu}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
