@@ -2,10 +2,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* Gold accent — single locked palette */
-  --color-gold-400: #D4AF37;
-  --color-gold-500: #C5A017;
-  --color-gold-600: #B8860B;
+  /* Navy accent — modern, authoritative */
+  --color-gold-400: #2C5282;
+  --color-gold-500: #1B3A5C;
+  --color-gold-600: #0F2744;
 
   /* Warm neutrals — consistent family */
   --color-cream-50: #fcfbfa;
@@ -62,7 +62,7 @@ p {
 }
 .glass-card:hover {
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-  border-color: rgba(212,175,55,0.25);
+  border-color: rgba(44,82,130,0.25);
 }
 
 /* Primary button — filled gold */
@@ -71,7 +71,7 @@ p {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, filter 0.2s ease;
 }
 .btn-primary:hover {
-  box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+  box-shadow: 0 8px 24px rgba(44,82,130,0.3);
   transform: translateY(-1px);
 }
 .btn-primary:active {
@@ -80,7 +80,7 @@ p {
 }
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.35);
+  box-shadow: 0 0 0 3px rgba(44,82,130,0.35);
 }
 
 /* Ghost button — outline */
@@ -90,8 +90,8 @@ p {
 }
 .btn-ghost:hover {
   background-color: var(--color-cream-100);
-  border-color: rgba(212,175,55,0.7);
-  box-shadow: 0 4px 16px rgba(212,175,55,0.1);
+  border-color: rgba(44,82,130,0.7);
+  box-shadow: 0 4px 16px rgba(44,82,130,0.1);
   transform: translateY(-1px);
 }
 .btn-ghost:active {
@@ -99,7 +99,7 @@ p {
 }
 .btn-ghost:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.25);
+  box-shadow: 0 0 0 3px rgba(44,82,130,0.25);
 }
 
 /* Text link — subtle underline animation */
@@ -126,7 +126,7 @@ p {
 .link-gold:focus-visible {
   outline: none;
   border-radius: 2px;
-  box-shadow: 0 0 0 2px rgba(212,175,55,0.25);
+  box-shadow: 0 0 0 2px rgba(44,82,130,0.25);
 }
 
 /* Skeleton loading */
@@ -173,6 +173,6 @@ html {
 /* Focus ring utility */
 .focus-ring:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.35);
+  box-shadow: 0 0 0 3px rgba(44,82,130,0.35);
   border-radius: 0.5rem;
 }

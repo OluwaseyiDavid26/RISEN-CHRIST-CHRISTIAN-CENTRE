@@ -60,7 +60,7 @@ function Salvation() {
            viewport={{ once: true }}
         >
           <Link to="/sinners">
-            <button className="inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-dark-900 font-semibold text-sm rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:scale-[0.98]">
+            <button className="inline-flex items-center justify-center px-8 py-3.5 bg-gold-500 text-dark-900 font-semibold text-sm rounded-full hover:bg-gold-400 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(44,82,130,0.3)] hover:-translate-y-0.5 active:scale-[0.98]">
               Pray the Sinner&rsquo;s Prayer
             </button>
           </Link>

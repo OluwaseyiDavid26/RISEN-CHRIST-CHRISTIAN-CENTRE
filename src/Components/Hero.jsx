@@ -53,20 +53,18 @@ function Hero() {
         />
       </motion.div>
 
-      {/* Sharp vertical gold accent line — the separator */}
-      <div className="hidden md:block absolute top-0 left-[55%] h-full z-10 pointer-events-none">
-        <div className="h-full w-[3px] bg-gold-400/80 shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
-      </div>
-
       {/* Content — offset right */}
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10 w-full h-full flex items-center">
         <div className="grid grid-cols-1 md:grid-cols-12 w-full gap-8">
           <div className="hidden md:block md:col-span-5 lg:col-span-6" />
 
           <motion.div
-            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16"
+            className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16 relative"
             style={{ opacity: prefersReducedMotion ? 1 : opacity }}
           >
+            {/* Vertical accent line — placed before the text, inside the column */}
+            <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-40 w-[3px] bg-gold-400/80 shadow-[0_0_20px_rgba(44,82,130,0.4)] rounded-full" />
+
             {/* Decorative gold line */}
             <motion.div
               initial={prefersReducedMotion ? {} : { scaleX: 0 }}
