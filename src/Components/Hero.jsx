@@ -62,9 +62,6 @@ function Hero() {
             className="col-span-1 md:col-span-6 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16 relative"
             style={{ opacity: prefersReducedMotion ? 1 : opacity }}
           >
-            {/* Vertical accent line — inside text column, before text */}
-            <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-40 w-[3px] bg-gold-400/80 shadow-[0_0_20px_rgba(107,63,160,0.4)] rounded-full" />
-
             {/* Decorative gold line */}
             <motion.div
               initial={prefersReducedMotion ? {} : { scaleX: 0 }}
