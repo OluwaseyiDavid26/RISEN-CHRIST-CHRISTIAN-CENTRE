@@ -133,6 +133,15 @@ function Resources() {
 
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
+        {/* Decorative gold line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="w-12 h-[2px] bg-gold-400 mb-6 origin-center mx-auto"
+        />
+
         <motion.p
           className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
           initial={{ opacity: 0, y: 20 }}

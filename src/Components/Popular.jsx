@@ -46,7 +46,7 @@ function Popular() {
               }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <div className="overflow-hidden rounded-2xl shadow-sm mb-4 border border-gray-100">
+              <div className="overflow-hidden rounded-2xl shadow-sm mb-4 border border-gray-100 group-hover:border-gold-400/30 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] group-hover:-translate-y-1 transition-all duration-500">
                 <img
                   src={branch.img}
                   alt={branch.name}

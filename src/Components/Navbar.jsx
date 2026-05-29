@@ -19,7 +19,6 @@ function Navbar() {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About Jesus", path: "/about-jesus" },
     { name: "Who We Are", path: "/who-we-are" },
     { name: "Empire", path: "/empire" },
     { name: "Events", path: "/events" },

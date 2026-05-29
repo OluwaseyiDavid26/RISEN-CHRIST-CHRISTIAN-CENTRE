@@ -7,7 +7,6 @@ import churchLogo from "../assets/church-logo.png";
 function Footer() {
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "About Jesus", path: "/about-jesus" },
     { name: "Who We Are", path: "/who-we-are" },
     { name: "Branches", path: "/empire" },
     { name: "Events", path: "/events" },

@@ -33,8 +33,11 @@ function Experience() {
   const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   return (
-    <section className="px-6 py-24 bg-cream-50">
-      <div className="max-w-6xl mx-auto w-full">
+    <section className="px-6 py-28 bg-cream-50 relative overflow-hidden">
+      <div className="absolute top-12 right-12 w-16 h-16 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+      <div className="absolute bottom-24 left-12 w-24 h-24 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+
+      <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Title + Paragraph */}
         <motion.div
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
@@ -43,10 +46,19 @@ function Experience() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
+          {/* Decorative gold line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="w-12 h-[2px] bg-gold-400 mb-6 origin-center mx-auto"
+          />
+
           <p className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4">
             Connect Online
           </p>
-          <h2 className="text-3xl md:text-5xl font-playfair font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 mb-6">
             Experience God&rsquo;s Presence from Anywhere
           </h2>
           <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto leading-relaxed">

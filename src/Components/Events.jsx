@@ -83,8 +83,11 @@ function Events() {
 
   if (events.length === 0) {
     return (
-      <section className="px-6 py-24 bg-cream-50 text-center">
-        <div className="max-w-xl mx-auto">
+      <section className="px-6 py-28 bg-cream-50 text-center relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/5 blur-[150px] rounded-full pointer-events-none" />
+        <div className="absolute top-12 left-12 w-20 h-20 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="w-12 h-[2px] bg-gold-400 mb-6 mx-auto" />
           <p className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4">Gatherings</p>
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-4">Upcoming Events</h2>
           <p className="text-gray-500 mb-8">No events scheduled right now. Check back soon for new gatherings.</p>
@@ -97,12 +100,22 @@ function Events() {
   }
 
   return (
-    <section className="px-6 py-24 bg-cream-50 text-gray-900 relative">
+    <section className="px-6 py-28 bg-cream-50 text-gray-900 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/5 blur-[150px] rounded-full pointer-events-none" />
-      
+      <div className="absolute top-12 left-12 w-20 h-20 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
+          {/* Decorative gold line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="w-12 h-[2px] bg-gold-400 mb-6 origin-center mx-auto"
+          />
+
           <motion.p
             className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}

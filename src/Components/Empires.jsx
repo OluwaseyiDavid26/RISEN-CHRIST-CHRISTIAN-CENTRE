@@ -3,11 +3,21 @@ import { Link } from "react-router-dom";
 
 function Empires() {
   return (
-    <section className="w-full py-24 px-6 bg-cream-50 text-center relative overflow-hidden">
+    <section className="w-full py-28 px-6 bg-cream-50 text-center relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-gold-400/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-12 left-12 w-20 h-20 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
 
       <div className="max-w-4xl mx-auto relative z-10">
+        {/* Decorative gold line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="w-12 h-[2px] bg-gold-400 mb-6 origin-center mx-auto"
+        />
+
         <motion.p
           className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
           initial={{ opacity: 0, y: 30 }}
@@ -29,7 +39,7 @@ function Empires() {
         </motion.h2>
 
         <motion.div
-          className="glass-card p-8 md:p-12 mb-12 relative overflow-hidden group"
+          className="glass-card p-8 md:p-12 mb-12 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-500"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}

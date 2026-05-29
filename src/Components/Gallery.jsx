@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Automatically imported images list (simulated array of all images in the folder)
@@ -48,6 +49,8 @@ function Gallery() {
     <section className="px-6 py-24 bg-white relative border-y border-gray-100">
       {/* Background decorations */}
       <div className="absolute top-1/2 left-0 w-full h-[300px] bg-gold-400/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2" />
+      <div className="absolute top-12 right-12 w-24 h-24 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
+      <div className="absolute bottom-12 left-12 w-16 h-16 border border-gold-400/10 rounded-full pointer-events-none hidden lg:block" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -87,7 +90,7 @@ function Gallery() {
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
             </div>
             <p className="text-gray-500 mb-4">No photos available yet.</p>
-            <a href="/photo-gallery" className="btn-ghost text-xs">View Full Gallery</a>
+            <Link to="/photo-gallery" className="btn-ghost text-xs">View Full Gallery</Link>
           </div>
         ) : (
           <>
@@ -96,7 +99,7 @@ function Gallery() {
               {previewImages.map((img, index) => (
                 <motion.div
                   key={img}
-                  className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card bg-gray-50"
+                  className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card bg-gray-50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-500"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: (index % 8) * 0.1 }}
@@ -131,12 +134,12 @@ function Gallery() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <a
-                href="/photo-gallery"
+              <Link
+                to="/photo-gallery"
                 className="btn-ghost text-xs"
               >
                 View Full Gallery
-              </a>
+              </Link>
             </motion.div>
           </>
         )}

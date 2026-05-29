@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+const pastorImg = "/church_images/WhatsApp Image 2026-05-13 at 11.43.30 PM.jpeg";
+
 function Hero() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const { scrollY } = useScroll();
@@ -20,19 +22,36 @@ function Hero() {
       {/* Top gradient for navbar readability */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black/40 via-black/10 to-transparent z-20 pointer-events-none" />
 
-      {/* Background image — left half, asymmetric */}
+      {/* Decorative floating shapes */}
+      {!prefersReducedMotion && (
+        <>
+          <motion.div
+            className="absolute top-[15%] left-[8%] w-24 h-24 md:w-40 md:h-40 rounded-full bg-gold-400/8 blur-2xl"
+            animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-[20%] right-[5%] w-32 h-32 md:w-48 md:h-48 rounded-full bg-gold-500/6 blur-3xl"
+            animate={{ y: [0, 15, 0], scale: [1, 0.95, 1] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </>
+      )}
+
+      {/* Background image — left half, asymmetric with pastor photo */}
       <motion.div
-        className="absolute inset-0 md:left-0 md:w-1/2 h-full z-0 overflow-hidden"
+        className="absolute inset-0 md:left-0 md:w-[55%] h-full z-0 overflow-hidden"
         style={{ y: prefersReducedMotion ? 0 : useTransform(scrollY, [0, 1000], ["0%", "15%"]) }}
       >
+        <div className="absolute inset-0 bg-dark-900/60 md:bg-transparent z-10 md:z-0" />
         <div
-          className="absolute inset-0 bg-no-repeat bg-contain bg-center md:bg-left opacity-15 md:opacity-100 transition-opacity duration-1000"
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-100 transition-opacity duration-1000"
           style={{
-            backgroundImage: `url('/church_images/jesus_sketch.jpg')`,
-            backgroundPosition: 'left center',
+            backgroundImage: `url('${pastorImg}')`,
           }}
         />
-        <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-cream-50" />
+        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 bg-gradient-to-r from-transparent to-cream-50" />
+        <div className="hidden md:block absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-dark-900/30 to-transparent" />
       </motion.div>
 
       {/* Content — offset right */}
@@ -44,11 +63,19 @@ function Hero() {
             className="col-span-1 md:col-span-7 lg:col-span-6 flex flex-col justify-center text-center md:text-left pt-48 md:pt-32 pb-16"
             style={{ opacity: prefersReducedMotion ? 1 : opacity }}
           >
+            {/* Decorative gold line */}
+            <motion.div
+              initial={prefersReducedMotion ? {} : { scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="w-12 h-[2px] bg-gold-400 mb-6 origin-left mx-auto md:mx-0"
+            />
+
             <motion.p
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-gold-500 font-semibold tracking-widest uppercase text-xs md:text-sm mb-4 drop-shadow-sm"
+              className="text-gold-400 font-semibold tracking-widest uppercase text-xs md:text-sm mb-4 drop-shadow-sm"
             >
               Welcome to the presence of God
             </motion.p>
@@ -57,10 +84,10 @@ function Hero() {
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold text-gray-900 leading-[1.05] mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold text-white md:text-gray-900 leading-[1.05] mb-6"
             >
               Risen Christ <br />
-              <span className="text-gold-500">
+              <span className="text-gold-400 md:text-gold-500">
                 Christian Centre
               </span>
             </motion.h1>
@@ -69,7 +96,7 @@ function Hero() {
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              className="text-gray-600 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
+              className="text-white/90 md:text-gray-600 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
             >
               Experience the power of His presence, a community of boundless love, and a place for spiritual renewal and divine encounter.
             </motion.p>
@@ -84,7 +111,7 @@ function Hero() {
                 Watch Messages
               </button>
 
-              <button className="btn-ghost w-full sm:w-auto">
+              <button className="btn-ghost w-full sm:w-auto text-white md:text-gray-700 border-white/30 md:border-gray-300 hover:border-gold-400 hover:text-gold-400 md:hover:text-gold-500">
                 Join Us Sunday
               </button>
             </motion.div>
