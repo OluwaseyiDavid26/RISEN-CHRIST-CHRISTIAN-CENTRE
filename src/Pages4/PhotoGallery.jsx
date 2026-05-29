@@ -49,14 +49,14 @@ function PhotoGallery() {
   };
 
   return (
-    <section className="px-6 py-32 bg-[#fcfbfa] min-h-screen relative">
-      <div className="absolute top-1/2 left-0 w-full h-[400px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none -translate-y-1/2" />
+    <section className="px-6 py-32 bg-cream-50 min-h-screen relative">
+      <div className="absolute top-1/2 left-0 w-full h-[400px] bg-gold-400/5 blur-[150px] rounded-full pointer-events-none -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <motion.p
-            className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+            className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ function PhotoGallery() {
             Full Photo Gallery
           </motion.h1>
           <motion.p
-            className="text-lg md:text-xl text-gray-600 font-light leading-relaxed font-outfit"
+            className="text-lg md:text-xl text-gray-600 font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -86,7 +86,7 @@ function PhotoGallery() {
           {images.slice(0, visibleCount).map((img, index) => (
             <motion.div
               key={img}
-              className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card shadow-sm border border-gray-100 bg-white"
+              className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden glass-card bg-white"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: (index % 8) * 0.1 }}
@@ -121,9 +121,9 @@ function PhotoGallery() {
              whileInView={{ opacity: 1 }}
              viewport={{ once: true }}
            >
-              <button 
+              <button
                 onClick={loadMore}
-                className="px-8 py-3 bg-white border border-gray-200 text-gray-700 font-semibold uppercase tracking-widest text-xs rounded-full hover:bg-gray-50 hover:text-gray-900 transition-all shadow-sm"
+                className="btn-ghost text-xs"
               >
                 Load More Photos
               </button>
@@ -134,7 +134,7 @@ function PhotoGallery() {
         <div className="flex justify-center mt-8">
           <button
             onClick={() => navigate(-1)}
-            className="text-gray-500 hover:text-[#D4AF37] text-sm uppercase tracking-widest font-semibold transition-colors"
+            className="text-gray-500 hover:text-gold-500 text-sm uppercase tracking-widest font-semibold transition-colors focus-visible:rounded focus-ring px-2 -ml-2"
           >
             ← Back
           </button>
@@ -152,9 +152,10 @@ function PhotoGallery() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-gray-900/95 backdrop-blur-lg p-4 sm:p-10"
             onClick={() => setSelectedImg(null)}
           >
-            <button 
-              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10 z-[110]"
+            <button
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10 z-[110] focus-visible:rounded-full focus-ring"
               onClick={() => setSelectedImg(null)}
+              aria-label="Close lightbox"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>

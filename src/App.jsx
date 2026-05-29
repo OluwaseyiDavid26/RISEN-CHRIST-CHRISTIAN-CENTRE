@@ -71,6 +71,7 @@ import CommitmentsManager from "./Pages/Admin/CommitmentsManager.jsx";
 function App() {
   return (
     <BrowserRouter>
+      <div className="grain-overlay">
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -106,6 +107,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
+      </div>
     </BrowserRouter>
   );
 }

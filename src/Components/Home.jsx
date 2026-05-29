@@ -32,14 +32,15 @@ function Home() {
   }, []);
 
   return (
-    <div className="relative bg-[#0a0a0a]">
+    <div className="relative bg-dark-900">
       {/* Live Stream Popup */}
       {showPopup && liveSettings?.isLive && liveSettings?.link && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a]/90 backdrop-blur-md p-4">
-          <div className="bg-[#121212] border border-white/10 rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark-900/90 backdrop-blur-md p-4">
+          <div className="bg-dark-800 border border-white/10 rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden relative">
             <button
               onClick={() => setShowPopup(false)}
-              className="absolute top-4 right-4 p-2 bg-black/50 rounded-full hover:bg-[var(--color-gold-500)] hover:text-black text-white transition-all z-10"
+              className="absolute top-4 right-4 p-2 bg-black/50 rounded-full hover:bg-gold-500 hover:text-black text-white transition-all z-10 focus-visible:rounded-full focus-ring"
+              aria-label="Close live stream"
             >
               <X size={20} />
             </button>
@@ -47,21 +48,21 @@ function Home() {
               <iframe
                 width="100%"
                 height="100%"
-                src={liveSettings.link} // Ensure this is an embed URL
+                src={liveSettings.link}
                 title="Live Stream"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-4 bg-[var(--color-gold-500)] text-[#0a0a0a] flex justify-between items-center">
+            <div className="p-4 bg-gold-500 text-dark-900 flex justify-between items-center">
               <span className="font-bold text-lg tracking-widest uppercase flex items-center gap-2">
                 <span className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
                 LIVE NOW
               </span>
               <button
                 onClick={() => setShowPopup(false)}
-                className="text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors"
+                className="text-sm font-semibold uppercase tracking-widest hover:text-white transition-colors focus-visible:rounded focus-ring px-2 -mr-2"
               >
                 Close
               </button>

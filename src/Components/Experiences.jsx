@@ -30,25 +30,27 @@ function Experience() {
       : url; 
   };
 
+  const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   return (
-    <section className="px-6 py-24 bg-[#fcfbfa]">
+    <section className="px-6 py-24 bg-cream-50">
       <div className="max-w-6xl mx-auto w-full">
         {/* Title + Paragraph */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <p className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4">
+          <p className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4">
             Connect Online
           </p>
           <h2 className="text-3xl md:text-5xl font-playfair font-bold text-gray-900 mb-6">
-            Experience God’s Presence from Anywhere
+            Experience God&rsquo;s Presence from Anywhere
           </h2>
-          <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto font-outfit leading-relaxed">
-            Can’t make it in person? Join us online and be part of our worship,
+          <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto leading-relaxed">
+            Can&rsquo;t make it in person? Join us online and be part of our worship,
             teachings, and special events from wherever you are. Stay connected
             and grow in faith with our live-streamed services.
           </p>
@@ -56,7 +58,7 @@ function Experience() {
 
         {/* Media Content: Live Stream Iframe OR Static Image */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
@@ -79,8 +81,8 @@ function Experience() {
                 className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                 <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center mb-4">
-                    <span className="text-4xl ml-2">▶</span>
+                 <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                  </div>
                  <span className="text-white font-playfair text-xl tracking-wide font-medium">Service Offline</span>
               </div>
@@ -90,7 +92,7 @@ function Experience() {
 
         {/* Text / Status Info */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
           viewport={{ once: true }}
@@ -107,12 +109,12 @@ function Experience() {
         {!isLive && (
           <motion.div
             className="flex justify-center mt-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <button className="px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-bold uppercase tracking-widest text-sm rounded-full hover:shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300">
+            <button className="btn-primary">
               Watch Previous Services
             </button>
           </motion.div>

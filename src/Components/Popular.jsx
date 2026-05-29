@@ -23,7 +23,7 @@ function Popular() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <p className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-2">
+          <p className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-2">
             Locations
           </p>
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900">
@@ -53,7 +53,7 @@ function Popular() {
                   className="w-full h-[350px] object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 />
               </div>
-              <h3 className="text-lg font-playfair font-semibold text-gray-900 group-hover:text-[#D4AF37] transition-colors">
+              <h3 className="text-lg font-playfair font-semibold text-gray-900 group-hover:text-gold-500 transition-colors">
                 {branch.name}
               </h3>
             </motion.div>

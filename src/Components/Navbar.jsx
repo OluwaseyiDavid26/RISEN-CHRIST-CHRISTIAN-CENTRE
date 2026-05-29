@@ -12,10 +12,8 @@ function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -31,54 +29,64 @@ function Navbar() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-3 border-b border-gray-100" : "bg-transparent py-6"
+        scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)] py-3" : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group focus-visible:rounded-lg focus-ring">
           <div className="bg-gray-900/5 p-1.5 rounded-full backdrop-blur-sm group-hover:bg-gray-900/10 transition-all border border-gray-900/5">
-             <img src={logo} alt="Logo" className="w-[50px] h-[50px] object-contain" />
+             <img src={logo} alt="Risen Christ Christian Centre Logo" className="w-[50px] h-[50px] object-contain" />
           </div>
-          <span className={`font-playfair font-bold text-xl hidden sm:block tracking-widest uppercase transition-colors duration-300 ${scrolled ? 'text-gray-900' : 'text-gray-900'} group-hover:text-[#D4AF37]`}>
+          <span className="font-playfair font-bold text-xl hidden sm:block tracking-tight text-gray-900 group-hover:text-gold-400 transition-colors duration-300">
             Risen Christ
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.2em] text-gray-800">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`hover:text-[#D4AF37] transition-colors duration-300 relative group ${
-                location.pathname === link.path ? "text-[#D4AF37]" : ""
-              }`}
-            >
-              {link.name}
-              {location.pathname === link.path && (
-                <motion.div layoutId="underline" className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#D4AF37]" />
-              )}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`relative py-1 transition-colors duration-300 focus-visible:rounded focus-ring ${
+                  isActive ? "text-gold-500" : "hover:text-gold-500"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold-400 rounded-full" />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Desktop Buttons */}
-        <div className="hidden lg:flex gap-6 items-center">
-          <Link to="/sinners" className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-800 hover:text-[#D4AF37] transition-colors">
+        <div className="hidden lg:flex gap-4 items-center">
+          <Link
+            to="/sinners"
+            className="text-sm font-medium text-gray-600 hover:text-gold-500 transition-colors focus-visible:rounded focus-ring px-2 py-1"
+          >
             Sinner Prayer
           </Link>
           <Link
             to="/giving"
-            className="border border-[#D4AF37] text-[#D4AF37] px-7 py-2.5 rounded-full hover:bg-[#D4AF37] hover:text-white transition-all duration-300 text-xs font-bold uppercase tracking-[0.15em]"
+            className="btn-primary text-xs px-6 py-2.5"
           >
             Giving
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="lg:hidden text-gray-900 p-2" onClick={toggleMenu}>
-          {isOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
+        <button
+          className="lg:hidden text-gray-900 p-2 rounded-lg hover:bg-gray-100 active:scale-95 transition-all focus-visible:rounded focus-ring"
+          onClick={toggleMenu}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
+          {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
         </button>
       </div>
 
@@ -87,34 +95,35 @@ function Navbar() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100vh" }}
+            animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-full left-0 w-full bg-white/98 backdrop-blur-xl border-t border-gray-100 overflow-y-auto shadow-2xl"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden fixed inset-x-0 top-[72px] bg-white/98 backdrop-blur-xl border-t border-gray-100 overflow-y-auto shadow-2xl"
           >
-            <div className="flex flex-col items-center py-12 space-y-8">
-              {navLinks.map((link) => (
+            <div className="flex flex-col items-center py-12 space-y-6">
+              {navLinks.map((link, i) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-lg font-medium uppercase tracking-[0.2em] ${
-                    location.pathname === link.path ? "text-[#D4AF37]" : "text-gray-900"
-                  } hover:text-[#D4AF37] transition`}
+                  className={`text-lg font-medium ${
+                    location.pathname === link.path ? "text-gold-500" : "text-gray-900"
+                  } hover:text-gold-400 transition-colors focus-visible:rounded focus-ring px-4 py-1`}
                   onClick={toggleMenu}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="w-12 h-[1px] bg-gray-200 my-4"></div>
+              <div className="w-12 h-px bg-gray-200 my-2" />
               <Link
                 to="/sinners"
-                className="text-sm font-medium uppercase tracking-[0.2em] text-gray-700 hover:text-[#D4AF37] transition"
+                className="text-sm font-medium text-gray-600 hover:text-gold-500 transition-colors focus-visible:rounded focus-ring px-4 py-1"
                 onClick={toggleMenu}
               >
                 Sinner Prayer
               </Link>
               <Link
                 to="/giving"
-                className="bg-[#D4AF37] text-white px-10 py-3.5 rounded-full font-bold uppercase tracking-[0.2em] hover:shadow-lg transition mt-4"
+                className="btn-primary mt-2"
                 onClick={toggleMenu}
               >
                 Giving

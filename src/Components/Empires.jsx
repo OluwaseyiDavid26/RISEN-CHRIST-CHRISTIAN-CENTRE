@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 function Empires() {
   return (
-    <section className="w-full py-24 px-6 bg-[#fcfbfa] text-center relative overflow-hidden">
+    <section className="w-full py-24 px-6 bg-cream-50 text-center relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none" />
-      
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-gold-400/5 blur-[120px] rounded-full pointer-events-none" />
+
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.p
-          className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -17,7 +17,7 @@ function Empires() {
         >
           Our Branches
         </motion.p>
-        
+
         <motion.h2
           className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair text-gray-900 mb-8"
           initial={{ opacity: 0, y: 30 }}
@@ -29,14 +29,14 @@ function Empires() {
         </motion.h2>
 
         <motion.div
-          className="glass-card p-8 md:p-12 mb-12 shadow-md relative overflow-hidden group border border-gray-100"
+          className="glass-card p-8 md:p-12 mb-12 relative overflow-hidden group"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light font-outfit">
+          <div className="absolute inset-0 bg-gradient-to-br from-gold-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light relative z-10">
             At <span className="text-gray-900 font-medium">Risen Christ Christian Centre</span>, we believe in the power of community
             and the importance of reaching beyond borders. Our Empires represent
             the different branches of our church, each serving as a beacon of
@@ -61,7 +61,7 @@ function Empires() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <Link to="/empire">
-            <button className="px-8 py-3.5 border border-[#D4AF37] text-[#B8860B] font-bold uppercase tracking-[0.15em] text-sm rounded-full hover:bg-[#D4AF37] hover:text-white transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(212,175,55,0.25)]">
+            <button className="btn-ghost">
               See All Branches
             </button>
           </Link>

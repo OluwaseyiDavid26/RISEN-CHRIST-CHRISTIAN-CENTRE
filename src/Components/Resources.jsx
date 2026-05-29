@@ -77,7 +77,7 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
 
   return (
     <motion.div
-      className="flex justify-between items-center p-5 gap-4 glass-card hover:bg-white hover:border-[#D4AF37] cursor-pointer transition-all duration-300 group shadow-sm hover:shadow-md"
+      className="flex justify-between items-center p-4 gap-4 bg-white rounded-xl border border-gray-100 hover:border-gold-400/30 cursor-pointer transition-all duration-300 group shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md"
       onMouseEnter={() => setHoveredItem(itemKey)}
       onMouseLeave={() => setHoveredItem(null)}
       initial={{ opacity: 0, y: 20 }}
@@ -87,12 +87,12 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
     >
       {/* Icon/Image Circle */}
       <motion.div
-        className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0 border border-gray-200 group-hover:border-[#D4AF37] transition-colors"
-        whileHover={{ scale: 1.1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+        className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0 border border-gray-100 group-hover:border-gold-400/40 transition-colors"
+        whileHover={{ scale: 1.08 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         {isHovered && IconComponent ? (
-          <IconComponent size={24} className="text-[#D4AF37] transition-colors" />
+          <IconComponent size={20} className="text-gold-400 transition-colors" />
         ) : (
           <img
             src={IMAGE_MAP[item.img]}
@@ -104,21 +104,21 @@ function ResourceItem({ item, itemKey, hoveredItem, setHoveredItem }) {
 
       {/* Text Content */}
       <div className="flex-1 min-w-0">
-        <h4 className="text-lg font-playfair font-semibold text-gray-900 group-hover:text-[#D4AF37] transition-colors duration-300 truncate">
+        <h4 className="text-base font-semibold text-gray-900 group-hover:text-gold-600 transition-colors duration-300 truncate">
           {item.name}
         </h4>
-        <p className="text-xs tracking-wide text-gray-500 group-hover:text-gray-700 transition-colors duration-300 mt-1">
+        <p className="text-xs tracking-wide text-gray-500 group-hover:text-gray-700 transition-colors duration-300 mt-0.5">
           {item.description}
         </p>
       </div>
 
       {/* Arrow */}
-      <motion.span
-        className="text-2xl text-transparent group-hover:text-[#D4AF37] transition-all duration-300 flex-shrink-0 -translate-x-2 group-hover:translate-x-0"
+      <span
+        className="text-xl text-transparent group-hover:text-gold-400 transition-all duration-300 flex-shrink-0 -translate-x-2 group-hover:translate-x-0"
         aria-hidden="true"
       >
-        →
-      </motion.span>
+        &#8594;
+      </span>
     </motion.div>
   );
 }
@@ -127,14 +127,14 @@ function Resources() {
   const [hoveredItem, setHoveredItem] = useState(null);
 
   return (
-    <section className="px-4 sm:px-6 py-24 md:py-32 bg-[#fcfbfa] relative overflow-hidden">
+    <section className="px-4 sm:px-6 py-24 md:py-32 bg-cream-50 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-gray-100/50 to-transparent pointer-events-none" />
 
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
         <motion.p
-          className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -142,7 +142,7 @@ function Resources() {
         >
           Spiritual Growth
         </motion.p>
-        
+
         <motion.h2
           className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-900 mb-6"
           initial={{ opacity: 0, y: 20 }}
@@ -154,23 +154,23 @@ function Resources() {
         </motion.h2>
 
         <motion.p
-          className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto font-outfit"
+          className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
           viewport={{ once: true }}
         >
           Explore a rich collection of faith-building materials to help you grow
-          spiritually and stay connected to God's Word.
+          spiritually and stay connected to God&rsquo;s Word.
         </motion.p>
       </div>
 
-      {/* Resource Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
+      {/* Resource Grid — asymmetric 2-col on desktop to break 3-equal pattern */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
         {RESOURCES_DATA.map((resource, groupIndex) => (
           <motion.div
             key={groupIndex}
-            className="space-y-6"
+            className={`space-y-6 ${groupIndex === 2 ? "md:col-span-2 md:max-w-lg md:mx-auto" : ""}`}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: groupIndex * 0.15 }}
@@ -182,7 +182,7 @@ function Resources() {
             </h3>
 
             {/* Category Items */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               {resource.items.map((item, itemIndex) => {
                 const itemKey = `${groupIndex}-${itemIndex}`;
 
@@ -190,7 +190,7 @@ function Resources() {
                   <Link
                     to={item.link}
                     key={itemKey}
-                    className="block no-underline"
+                    className="block no-underline focus-visible:rounded-xl focus-ring"
                   >
                     <ResourceItem
                       item={item}

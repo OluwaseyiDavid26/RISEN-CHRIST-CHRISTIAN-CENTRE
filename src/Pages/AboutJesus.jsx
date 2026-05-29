@@ -7,14 +7,14 @@ const imgResurrection = "/church_images/jesus_resurrection_new.png"; // Generate
 
 function AboutJesus() {
   return (
-    <div className="bg-[#fcfbfa] min-h-screen pt-32 pb-24 text-gray-900 font-outfit relative overflow-hidden">
+    <div className="bg-cream-50 min-h-screen pt-32 pb-24 text-gray-900 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-gold-400/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Header Section */}
       <section className="px-6 max-w-5xl mx-auto text-center mb-24 relative z-10">
         <motion.p
-          className="text-[#C5A017] text-sm uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-gold-500 text-sm uppercase tracking-widest font-semibold mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -22,13 +22,13 @@ function AboutJesus() {
           The Savior of the World
         </motion.p>
         <motion.h1
-          className="text-5xl md:text-7xl font-playfair font-bold mb-8 text-gray-900 leading-tight"
+          className="text-5xl md:text-7xl font-playfair font-bold mb-8 text-gray-900 leading-[1.05]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           The Life & Ministry of <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A017] to-[#B8860B]">
+          <span className="text-gold-500">
             Jesus Christ
           </span>
         </motion.h1>
@@ -51,7 +51,7 @@ function AboutJesus() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <p className="text-[#C5A017] text-xs uppercase tracking-[0.2em] font-bold mb-3">Divine Wisdom</p>
+          <p className="text-gold-500 text-xs uppercase tracking-widest font-bold mb-3">Divine Wisdom</p>
           <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-6 text-gray-900">
             The Greatest Teacher
           </h2>
@@ -62,9 +62,9 @@ function AboutJesus() {
             His most famous discourse, the Sermon on the Mount, challenged the established laws of the time. He taught us to love our enemies, to turn the other cheek, and to find true blessedness in humility and peace.
           </p>
           <ul className="space-y-3 font-medium text-gray-800">
-             <li className="flex items-center gap-3"><span className="text-[#D4AF37]">✦</span> "I am the light of the world." (John 8:12)</li>
-             <li className="flex items-center gap-3"><span className="text-[#D4AF37]">✦</span> "Love your neighbor as yourself." (Mark 12:31)</li>
-             <li className="flex items-center gap-3"><span className="text-[#D4AF37]">✦</span> "Blessed are the pure in heart." (Matthew 5:8)</li>
+             <li className="flex items-center gap-3"><span className="text-gold-400">✦</span> &ldquo;I am the light of the world.&rdquo; (John 8:12)</li>
+             <li className="flex items-center gap-3"><span className="text-gold-400">✦</span> &ldquo;Love your neighbor as yourself.&rdquo; (Mark 12:31)</li>
+             <li className="flex items-center gap-3"><span className="text-gold-400">✦</span> &ldquo;Blessed are the pure in heart.&rdquo; (Matthew 5:8)</li>
           </ul>
         </motion.div>
         <motion.div
@@ -101,7 +101,7 @@ function AboutJesus() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <p className="text-[#C5A017] text-xs uppercase tracking-[0.2em] font-bold mb-3">Divine Power</p>
+          <p className="text-gold-500 text-xs uppercase tracking-widest font-bold mb-3">Divine Power</p>
           <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-6 text-gray-900">
             The Miracle Worker
           </h2>
@@ -111,8 +111,8 @@ function AboutJesus() {
           <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
             Beyond physical healing, His miracles displayed His absolute power over nature—calming raging storms with a word and feeding thousands with a few loaves of bread. Every miracle was an act of profound compassion, pointing humanity toward the ultimate spiritual healing found only in Him.
           </p>
-          <div className="p-6 bg-gray-50 border-l-4 border-[#D4AF37] rounded-r-xl">
-             <p className="italic text-gray-700 font-playfair text-lg">"With man this is impossible, but with God all things are possible." <span className="block text-sm font-sans mt-2 text-gray-500 not-italic uppercase tracking-widest font-bold">— Matthew 19:26</span></p>
+          <div className="p-6 bg-gray-50 border-l-4 border-gold-400 rounded-r-xl">
+             <p className="italic text-gray-700 font-playfair text-lg">&ldquo;With man this is impossible, but with God all things are possible.&rdquo; <span className="block text-sm mt-2 text-gray-500 not-italic tracking-wide font-medium">&mdash; Matthew 19:26</span></p>
           </div>
         </motion.div>
       </section>
@@ -126,7 +126,7 @@ function AboutJesus() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <p className="text-[#C5A017] text-xs uppercase tracking-[0.2em] font-bold mb-3">Eternal Victory</p>
+          <p className="text-gold-500 text-xs uppercase tracking-widest font-bold mb-3">Eternal Victory</p>
           <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-6 text-gray-900">
             The Resurrection
           </h2>
@@ -136,12 +136,12 @@ function AboutJesus() {
           <p className="text-lg text-gray-600 font-light leading-relaxed mb-8">
             Jesus resurrected in glorious victory, conquering death and hell forever. Because He lives, we are offered the gift of eternal life. The Resurrection is the foundation of the Christian faith, bringing hope, redemption, and unending grace to all who believe.
           </p>
-          <a href="/sinners" className="inline-block px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#C5A017] text-white font-bold uppercase tracking-widest text-xs rounded-full hover:shadow-[0_8px_20px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 transition-all duration-300">
+          <a href="/sinners" className="btn-primary text-xs">
             Accept Jesus Today
           </a>
         </motion.div>
         <motion.div
-          className="order-1 lg:order-2 w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-[#D4AF37]/20 bg-white p-2"
+          className="order-1 lg:order-2 w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-gold-400/20 bg-white p-2"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
